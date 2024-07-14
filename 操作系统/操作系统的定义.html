@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>操作系统的定义 - 浩瀚星河</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 首页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../操作系统/index.html"><strong aria-hidden="true">2.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../操作系统/操作系统的定义.html" class="active"><strong aria-hidden="true">2.1.</strong> 操作系统的定义</a></li><li class="chapter-item expanded "><a href="../操作系统/进程.html"><strong aria-hidden="true">2.2.</strong> 进程</a></li><li class="chapter-item expanded "><a href="../操作系统/操作系统总结.html"><strong aria-hidden="true">2.3.</strong> 操作系统总结</a></li><li class="chapter-item expanded "><a href="../操作系统/Linux指令.html"><strong aria-hidden="true">2.4.</strong> Linux 指令</a></li></ol></li><li class="chapter-item expanded "><a href="../Git/index.html"><strong aria-hidden="true">3.</strong> Git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Git/git创建补丁.html"><strong aria-hidden="true">3.1.</strong> git 创建补丁</a></li><li class="chapter-item expanded "><a href="../Git/git命令.html"><strong aria-hidden="true">3.2.</strong> git 命令</a></li><li class="chapter-item expanded "><a href="../Git/git在Jetbrains中的使用.html"><strong aria-hidden="true">3.3.</strong> git 在 Jetbrains 中的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Docker/index.html"><strong aria-hidden="true">4.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Docker/GVC配置.html"><strong aria-hidden="true">4.1.</strong> GVC配置</a></li><li class="chapter-item expanded "><a href="../Docker/blog-readme.html"><strong aria-hidden="true">4.2.</strong> Blog Readme</a></li><li class="chapter-item expanded "><a href="../Docker/docker-compose命令.html"><strong aria-hidden="true">4.3.</strong> docker-compose 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker命令.html"><strong aria-hidden="true">4.4.</strong> docker 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署gin,vue博客.html"><strong aria-hidden="true">4.5.</strong> docker 部署 gin,vue 博客</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署ollama.html"><strong aria-hidden="true">4.6.</strong> docker 部署 ollama</a></li><li class="chapter-item expanded "><a href="../Docker/gin-vue-community.html"><strong aria-hidden="true">4.7.</strong> Gin Vue Community</a></li><li class="chapter-item expanded "><a href="../Docker/数据库的设计.html"><strong aria-hidden="true">4.8.</strong> 数据库的设计</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Typescript/index.html"><strong aria-hidden="true">5.</strong> Typescript</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/index.html"><strong aria-hidden="true">5.1.</strong> 一.变量的类型</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中哪些判断条件是true,哪些是false.html"><strong aria-hidden="true">5.1.1.</strong> ts 中哪些判断条件是 true,哪些是 false</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的基本类型.html"><strong aria-hidden="true">5.1.2.</strong> ts 中的基本类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中变量的任意类型.html"><strong aria-hidden="true">5.1.3.</strong> ts 中变量的任意类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的Object和object.html"><strong aria-hidden="true">5.1.4.</strong> ts 中的 Object 和 object</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的接口和对象类型.html"><strong aria-hidden="true">5.1.5.</strong> ts 中的接口和对象类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的数组类型.html"><strong aria-hidden="true">5.1.6.</strong> ts 中的数组类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的函数类型.html"><strong aria-hidden="true">5.1.7.</strong> ts 中的函数类型</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../uniapp/index.html"><strong aria-hidden="true">6.</strong> Uniapp</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../uniapp/uniapp中pages.json的配置.html"><strong aria-hidden="true">6.1.</strong> uniapp 中 pages.json 的配置</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp命令行创建项目.html"><strong aria-hidden="true">6.2.</strong> uniapp 命令行创建项目</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp拦截器.html"><strong aria-hidden="true">6.3.</strong> uniapp 拦截器</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp轮播图.html"><strong aria-hidden="true">6.4.</strong> uniapp 轮播图</a></li><li class="chapter-item expanded "><a href="../uniapp/vscode中的uniapp配置.html"><strong aria-hidden="true">6.5.</strong> vscode 中的 uniapp 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/index.html"><strong aria-hidden="true">7.</strong> Vue</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/index.html"><strong aria-hidden="true">7.1.</strong> Css3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/css3中的sticky定位.html"><strong aria-hidden="true">7.1.1.</strong> css3 中的 sticky 定位</a></li><li class="chapter-item expanded "><a href="../Vue/css3/css3中的伪类.html"><strong aria-hidden="true">7.1.2.</strong> css3 中的伪类</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/element-plus/index.html"><strong aria-hidden="true">7.2.</strong> ElementPlus</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus导入自定义主题色.html"><strong aria-hidden="true">7.2.1.</strong> element-plus 导入自定义主题色</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus表单校验.html"><strong aria-hidden="true">7.2.2.</strong> element-plus 表单校验</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus去除菜单下划线.html"><strong aria-hidden="true">7.2.3.</strong> element-plus 去除菜单下划线</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/error/index.html"><strong aria-hidden="true">7.3.</strong> Error</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/error/无法找到.vue.html"><strong aria-hidden="true">7.3.1.</strong> 无法找到.vue</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/js/index.html"><strong aria-hidden="true">7.4.</strong> Js</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/js/async和await的使用.html"><strong aria-hidden="true">7.4.1.</strong> async 和 await 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/es6模板字符串.html"><strong aria-hidden="true">7.4.2.</strong> es6 模板字符串</a></li><li class="chapter-item expanded "><a href="../Vue/js/export和export_default的区别.html"><strong aria-hidden="true">7.4.3.</strong> export 和 export_default 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/js/import的使用.html"><strong aria-hidden="true">7.4.4.</strong> import 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/js函数注释.html"><strong aria-hidden="true">7.4.5.</strong> js 函数注释</a></li><li class="chapter-item expanded "><a href="../Vue/js/js的可选链运算符.html"><strong aria-hidden="true">7.4.6.</strong> js 的可选链运算符</a></li><li class="chapter-item expanded "><a href="../Vue/js/promise函数的使用.html"><strong aria-hidden="true">7.4.7.</strong> promise 函数的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/pinia/index.html"><strong aria-hidden="true">7.5.</strong> Pinia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/pinia/pinia的信息存入LocalStorage.html"><strong aria-hidden="true">7.5.1.</strong> pinia 的信息存入 LocalStorage</a></li><li class="chapter-item expanded "><a href="../Vue/pinia/vue3中的pinia的使用.html"><strong aria-hidden="true">7.5.2.</strong> vue3 中的 pinia 的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/sass/index.html"><strong aria-hidden="true">7.6.</strong> Sass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/sass/sass中的%选择器.html"><strong aria-hidden="true">7.6.1.</strong> sass 中的%选择器</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue-router/index.html"><strong aria-hidden="true">7.7.</strong> VueRouter</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中keep-alive的使用.html"><strong aria-hidden="true">7.7.1.</strong> vue3 中 keep-alive 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中滚动行为scrollBehavior.html"><strong aria-hidden="true">7.7.2.</strong> vue3 中滚动行为 scrollBehavior</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中的router-view.html"><strong aria-hidden="true">7.7.3.</strong> vue3 中的 router-view</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中配置@别名.html"><strong aria-hidden="true">7.7.4.</strong> vue3 中配置@别名</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue2/index.html"><strong aria-hidden="true">7.8.</strong> Vue2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue2/vue2的sass-loader载入问题.html"><strong aria-hidden="true">7.8.1.</strong> vue2 的 sass-loader 载入问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2自定义登录组件.html"><strong aria-hidden="true">7.8.2.</strong> vue2 自定义登录组件</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2路由只能跳转一次问题.html"><strong aria-hidden="true">7.8.3.</strong> vue2 路由只能跳转一次问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2配置.html"><strong aria-hidden="true">7.8.4.</strong> vue2 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue3/index.html"><strong aria-hidden="true">7.9.</strong> Vue3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中hooks和pinia的区别.html"><strong aria-hidden="true">7.9.1.</strong> vue3 中 hooks 和 pinia 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中sass的使用.html"><strong aria-hidden="true">7.9.2.</strong> vue3 中 sass 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中slot和props的区别.html"><strong aria-hidden="true">7.9.3.</strong> vue3 中 slot 和 props 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中使用defineProps和defineEmits.html"><strong aria-hidden="true">7.9.4.</strong> vue3 中使用 defineProps 和 defineEmits</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的computed和watch方法.html"><strong aria-hidden="true">7.9.5.</strong> vue3 中的 computed 和 watch 方法</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的npm安装包.html"><strong aria-hidden="true">7.9.6.</strong> vue3 中的 npm 安装包</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的provide和inject.html"><strong aria-hidden="true">7.9.7.</strong> vue3 中的 provide 和 inject</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的scoped和v-deep.html"><strong aria-hidden="true">7.9.8.</strong> vue3 中的 scoped 和 v-deep</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用props传值.html"><strong aria-hidden="true">7.9.9.</strong> vue3 使用 props 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用slot传值.html"><strong aria-hidden="true">7.9.10.</strong> vue3 使用 slot 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3配置axios.html"><strong aria-hidden="true">7.9.11.</strong> vue3 配置 axios</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/单文件和多文件.html"><strong aria-hidden="true">7.9.12.</strong> 单文件和多文件</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/响应式和声明式.html"><strong aria-hidden="true">7.9.13.</strong> 响应式和声明式</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/选项式和组合式.html"><strong aria-hidden="true">7.9.14.</strong> 选项式和组合式</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueplugins/index.html"><strong aria-hidden="true">7.10.</strong> Vueplugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueplugins/图片放大镜效果.html"><strong aria-hidden="true">7.10.1.</strong> 图片放大镜效果</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueuse/index.html"><strong aria-hidden="true">7.11.</strong> Vueuse</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueuse/useIntersectionObserver.html"><strong aria-hidden="true">7.11.1.</strong> Use Intersection Observer</a></li><li class="chapter-item expanded "><a href="../Vue/vueuse/useScroll.html"><strong aria-hidden="true">7.11.2.</strong> Use Scroll</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/相关配置/index.html"><strong aria-hidden="true">7.12.</strong> 相关配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/相关配置/prettier格式化插件.html"><strong aria-hidden="true">7.12.1.</strong> prettier 格式化插件</a></li><li class="chapter-item expanded "><a href="../Vue/相关配置/设置路径src目录别名为@.html"><strong aria-hidden="true">7.12.2.</strong> 设置路径src目录别名为@</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Django/index.html"><strong aria-hidden="true">8.</strong> Django</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Django/Django.html"><strong aria-hidden="true">8.1.</strong> Django 的 bug</a></li><li class="chapter-item expanded "><a href="../Django/Drf用户认证.html"><strong aria-hidden="true">8.2.</strong> Drf 用户认证</a></li><li class="chapter-item expanded "><a href="../Django/Token详解.html"><strong aria-hidden="true">8.3.</strong> Token 详解</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/index.html"><strong aria-hidden="true">9.</strong> Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/index.html"><strong aria-hidden="true">9.1.</strong> Bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/gorm无法寻址.html"><strong aria-hidden="true">9.1.1.</strong> gorm 无法寻址</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gin/index.html"><strong aria-hidden="true">9.2.</strong> Gin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/Gin/gin实现热加载.html"><strong aria-hidden="true">9.2.1.</strong> gin 实现热加载</a></li><li class="chapter-item expanded "><a href="../Go/Gin/gin获取路径参数.html"><strong aria-hidden="true">9.2.2.</strong> gin 获取路径参数</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gorm/index.html"><strong aria-hidden="true">9.3.</strong> Gorm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对一.html"><strong aria-hidden="true">9.3.1.</strong> gorm 一对一</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对多.html"><strong aria-hidden="true">9.3.2.</strong> gorm 一对多</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm多态关联.html"><strong aria-hidden="true">9.3.3.</strong> gorm 多态关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的Many2Many.html"><strong aria-hidden="true">9.3.4.</strong> gorm 的 Many2Many</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的关联.html"><strong aria-hidden="true">9.3.5.</strong> gorm 的关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的多态关联和事务.html"><strong aria-hidden="true">9.3.6.</strong> gorm 的多态关联和事务</a></li><li class="chapter-item expanded "><a href="../Go/gorm/增删改查.html"><strong aria-hidden="true">9.3.7.</strong> 增删改查</a></li><li class="chapter-item expanded "><a href="../Go/gorm/连接mysql.html"><strong aria-hidden="true">9.3.8.</strong> 连接 mysql</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/go基础知识/index.html"><strong aria-hidden="true">9.4.</strong> go 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/go基础知识/go_get和go_install区别.html"><strong aria-hidden="true">9.4.1.</strong> go_get 和 go_install 区别</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go中结构体互转.html"><strong aria-hidden="true">9.4.2.</strong> go 中结构体互转</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go变量声明.html"><strong aria-hidden="true">9.4.3.</strong> go 变量声明</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go文件操作.html"><strong aria-hidden="true">9.4.4.</strong> go 文件操作</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go环境变量及配置.html"><strong aria-hidden="true">9.4.5.</strong> go 环境变量及配置</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go的printf占位符.html"><strong aria-hidden="true">9.4.6.</strong> go 的 printf 占位符</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Mysql/index.html"><strong aria-hidden="true">10.</strong> Mysql</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Mysql/数据库画er图.html"><strong aria-hidden="true">10.1.</strong> 数据库画 er 图</a></li><li class="chapter-item expanded "><a href="../Mysql/第三章作业.html"><strong aria-hidden="true">10.2.</strong> 第三章作业</a></li></ol></li><li class="chapter-item expanded "><a href="../openguass/index.html"><strong aria-hidden="true">11.</strong> Openguass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../openguass/postgresql增删改查.html"><strong aria-hidden="true">11.1.</strong> postgresql 增删改查</a></li><li class="chapter-item expanded "><a href="../openguass/postgresql文档.html"><strong aria-hidden="true">11.2.</strong> postgresql 文档</a></li><li class="chapter-item expanded "><a href="../openguass/创建openguass容器.html"><strong aria-hidden="true">11.3.</strong> 创建 openguass 容器</a></li><li class="chapter-item expanded "><a href="../openguass/数据库错题.html"><strong aria-hidden="true">11.4.</strong> 数据库错题</a></li><li class="chapter-item expanded "><a href="../openguass/第一次实验.html"><strong aria-hidden="true">11.5.</strong> 第一次实验</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">浩瀚星河</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="操作系统"><a class="header" href="#操作系统">操作系统</a></h1>
+<h2 id="操作系统的定义"><a class="header" href="#操作系统的定义">操作系统的定义</a></h2>
+<blockquote>
+<p>操作系统是计算机系统的一个系统软件，他统一管理计算机的软硬件资源和控制程序的执行</p>
+</blockquote>
+<h2 id="操作系统的分类"><a class="header" href="#操作系统的分类">操作系统的分类</a></h2>
+<blockquote>
+<p>手工操作阶段，早期批处理系统，执行系统，多道批处理系统，分时系统，实时系统，通用操作系统，微机操作系统</p>
+</blockquote>
+<h3 id="作业--程序--数据作业体作业说明书用户想要系统怎么处理程序数据"><a class="header" href="#作业--程序--数据作业体作业说明书用户想要系统怎么处理程序数据">作业 = 程序 + 数据（作业体）+作业说明书（用户想要系统怎么处理程序数据）</a></h3>
+<h3 id="调度是操作系统或其他系统软件决定将计算机资源分配给哪些任务或进程的过程"><a class="header" href="#调度是操作系统或其他系统软件决定将计算机资源分配给哪些任务或进程的过程">调度是操作系统或其他系统软件决定将计算机资源分配给哪些任务或进程的过程</a></h3>
+<h6 id="手工操作阶段"><a class="header" href="#手工操作阶段">手工操作阶段</a></h6>
+<p>数据程序交互依赖于人工换卡，人工装卡片，读取数据，计算机做运算</p>
+<h6 id="早期批处理系统单道批处理系统"><a class="header" href="#早期批处理系统单道批处理系统">早期批处理系统（<strong>单道批处理系统</strong>）</a></h6>
+<p>用户对操作员提供数据，程序，作业说明书，操作员把用户数据（一堆卡片） ===&gt; 从人工换卡一张变成了一堆</p>
+<p>装到输入设备，传上磁带。</p>
+<p>若监督程序发现当前作业（一张卡片）符合系统运行要求，把控制权交给作业，编译运行，</p>
+<p>否则跳过不执行</p>
+<p>直至作业执行完毕</p>
+<p>（系统利用率不高，在cpu计算时候，需要数据，要等待IO读写完成，cpu才能继续计算，利用率不高）</p>
+<h6 id="多道批处理系统"><a class="header" href="#多道批处理系统">多道批处理系统</a></h6>
+<p>可以支持多道程序执行，即同时运行多个程序，通过合理的调度算法来共享系统资源，提高系统的利用率和吞吐量</p>
+<ol>
+<li><strong>提高资源利用率</strong>：多道批处理系统可以同时处理多个作业，使得系统资源得到更充分的利用。当一个作业在等待I/O操作时，CPU可以被分配给另一个正在运行的作业，从而减少了资源空闲时间。</li>
+<li><strong>减少用户等待时间</strong>：多道批处理系统可以按照一定的调度算法同时运行多个作业，因此用户不需要等待一个作业执行完毕才能提交下一个作业，从而减少了用户的等待时间。</li>
+<li><strong>提高系统吞吐量</strong>：由于多道批处理系统能够并行执行多个作业，因此系统的吞吐量（即单位时间内完成的作业数量）相对较高，能够更有效地处理大量作业。</li>
+</ol>
+<h6 id="分时系统"><a class="header" href="#分时系统">分时系统</a></h6>
+<p>分时系统将处理器时间切片，这是其核心实现原理之一。在分时系统中，处理器会周期性地轮流分配给各个用户或进程，每个用户或进程都被分配一小段时间（即时间片）来执行其任务。这种时间分配是周期性的，因此每个用户或进程都会在一定时间内获得处理器的执行时间。</p>
+<h6 id="实时系统"><a class="header" href="#实时系统">实时系统</a></h6>
+<p>实时系统是一类针对时间敏感性应用设计的操作系统。它们的主要特点是对任务的响应时间有着严格的要求，必须在特定的时间范围内完成任务的处理。实时系统通常被用于需要及时响应的应用领域，如航空航天、工业控制、医疗设备等。</p>
+<h6 id="微机操作系统"><a class="header" href="#微机操作系统">微机操作系统</a></h6>
+<p>个人机器，如笔记本电脑，32位，64位，有单用户多任务操作系统和多用户多任务操作系统（多个用户访问同一台主机，如UNIX操作系统）</p>
+<h6 id="网络操作系统"><a class="header" href="#网络操作系统">网络操作系统</a></h6>
+<p>网络操作系统是一种专门设计用于网络环境下的操作系统，它提供了一系列功能和服务，以支持网络通信、数据传输和资源共享等。网络操作系统通常被用于服务器、路由器、交换机等网络设备上，以及用于构建分布式系统和云计算环境中。既可以让本地用户访问也能够让远程用户访问</p>
+<h6 id="分布式操作系统"><a class="header" href="#分布式操作系统">分布式操作系统</a></h6>
+<p>分布式操作系统是一种运行在多台计算机上、通过网络协作工作的操作系统。它的设计目标是允许多个计算机节点（通常是服务器或节点）协同工作，共同提供服务和处理任务，以实现高性能、高可用性和可伸缩性。</p>
+<h6 id="嵌入式操作系统"><a class="header" href="#嵌入式操作系统">嵌入式操作系统</a></h6>
+<p>嵌入式操作系统是专门设计用于嵌入式系统的操作系统，它通常运行在资源有限的嵌入式设备上，如微控制器、传感器、智能家居设备、工业控制系统等。嵌入式操作系统的设计目标是提供轻量级、高效率的操作系统内核，以满足嵌入式设备的特定需求。</p>
+<h2 id="操作系统的功能"><a class="header" href="#操作系统的功能">操作系统的功能</a></h2>
+<h4 id="处理器管理"><a class="header" href="#处理器管理">处理器管理</a></h4>
+<p>对处理器的管理归结为对线程，进程的管理和调度</p>
+<blockquote>
+<ul>
+<li>进程控制和管理</li>
+<li>进程同步和互斥</li>
+<li>进程通信</li>
+<li>进程死锁</li>
+<li>线程控制和管理</li>
+<li>处理器调度</li>
+</ul>
+</blockquote>
+<h4 id="作业管理"><a class="header" href="#作业管理">作业管理</a></h4>
+<p>操作系统对作业的控制和调度</p>
+<blockquote>
+<ul>
+<li>作业输入</li>
+<li>作业控制</li>
+<li>作业调度</li>
+</ul>
+</blockquote>
+<h4 id="存储管理"><a class="header" href="#存储管理">存储管理</a></h4>
+<p>内存的垃圾回收机制，提高存储利用率</p>
+<blockquote>
+<ul>
+<li>主存分配与回收</li>
+<li>地址转换和存储保护</li>
+<li>主存的共享与保护</li>
+<li>主存扩充</li>
+</ul>
+</blockquote>
+<h4 id="设备管理"><a class="header" href="#设备管理">设备管理</a></h4>
+<p>提高cpu和IO读写利用率</p>
+<blockquote>
+<ul>
+<li>提供设备控制处理</li>
+<li>提供缓冲区处理</li>
+<li>实现设备独立性</li>
+<li>实现设备的分配与回收</li>
+<li>实现共享设备的驱动调度</li>
+<li>实现虚拟设备</li>
+</ul>
+</blockquote>
+<h4 id="文件管理"><a class="header" href="#文件管理">文件管理</a></h4>
+<p>存储文件，保证文件安全</p>
+<blockquote>
+<ul>
+<li>提供文件的逻辑组织方法</li>
+<li>提供文件的物理组织方法</li>
+<li>提供文件的存储的使用方法</li>
+<li>提供文件的目录管理</li>
+<li>实现文件的共享与保护</li>
+<li>实现文件的存储空间管理</li>
+</ul>
+</blockquote>
+<h2 id="操作系统的特征"><a class="header" href="#操作系统的特征">操作系统的特征</a></h2>
+<blockquote>
+<ul>
+<li>并发</li>
+<li>并行</li>
+<li>共享</li>
+<li>异步性</li>
+</ul>
+</blockquote>
+<h2 id="操作系统的作用"><a class="header" href="#操作系统的作用">操作系统的作用</a></h2>
+<blockquote>
+<p>用户层面：用户与计算机硬件系统的接口</p>
+<p>资源管理层面：计算机系统资源的管理者</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../操作系统/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../操作系统/进程.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../操作系统/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../操作系统/进程.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>git 命令 - 浩瀚星河</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 首页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../操作系统/index.html"><strong aria-hidden="true">2.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../操作系统/操作系统的定义.html"><strong aria-hidden="true">2.1.</strong> 操作系统的定义</a></li><li class="chapter-item expanded "><a href="../操作系统/进程.html"><strong aria-hidden="true">2.2.</strong> 进程</a></li><li class="chapter-item expanded "><a href="../操作系统/操作系统总结.html"><strong aria-hidden="true">2.3.</strong> 操作系统总结</a></li><li class="chapter-item expanded "><a href="../操作系统/Linux指令.html"><strong aria-hidden="true">2.4.</strong> Linux 指令</a></li></ol></li><li class="chapter-item expanded "><a href="../Git/index.html"><strong aria-hidden="true">3.</strong> Git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Git/git创建补丁.html"><strong aria-hidden="true">3.1.</strong> git 创建补丁</a></li><li class="chapter-item expanded "><a href="../Git/git命令.html" class="active"><strong aria-hidden="true">3.2.</strong> git 命令</a></li><li class="chapter-item expanded "><a href="../Git/git在Jetbrains中的使用.html"><strong aria-hidden="true">3.3.</strong> git 在 Jetbrains 中的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Docker/index.html"><strong aria-hidden="true">4.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Docker/GVC配置.html"><strong aria-hidden="true">4.1.</strong> GVC配置</a></li><li class="chapter-item expanded "><a href="../Docker/blog-readme.html"><strong aria-hidden="true">4.2.</strong> Blog Readme</a></li><li class="chapter-item expanded "><a href="../Docker/docker-compose命令.html"><strong aria-hidden="true">4.3.</strong> docker-compose 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker命令.html"><strong aria-hidden="true">4.4.</strong> docker 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署gin,vue博客.html"><strong aria-hidden="true">4.5.</strong> docker 部署 gin,vue 博客</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署ollama.html"><strong aria-hidden="true">4.6.</strong> docker 部署 ollama</a></li><li class="chapter-item expanded "><a href="../Docker/gin-vue-community.html"><strong aria-hidden="true">4.7.</strong> Gin Vue Community</a></li><li class="chapter-item expanded "><a href="../Docker/数据库的设计.html"><strong aria-hidden="true">4.8.</strong> 数据库的设计</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Typescript/index.html"><strong aria-hidden="true">5.</strong> Typescript</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/index.html"><strong aria-hidden="true">5.1.</strong> 一.变量的类型</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中哪些判断条件是true,哪些是false.html"><strong aria-hidden="true">5.1.1.</strong> ts 中哪些判断条件是 true,哪些是 false</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的基本类型.html"><strong aria-hidden="true">5.1.2.</strong> ts 中的基本类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中变量的任意类型.html"><strong aria-hidden="true">5.1.3.</strong> ts 中变量的任意类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的Object和object.html"><strong aria-hidden="true">5.1.4.</strong> ts 中的 Object 和 object</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的接口和对象类型.html"><strong aria-hidden="true">5.1.5.</strong> ts 中的接口和对象类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的数组类型.html"><strong aria-hidden="true">5.1.6.</strong> ts 中的数组类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的函数类型.html"><strong aria-hidden="true">5.1.7.</strong> ts 中的函数类型</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../uniapp/index.html"><strong aria-hidden="true">6.</strong> Uniapp</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../uniapp/uniapp中pages.json的配置.html"><strong aria-hidden="true">6.1.</strong> uniapp 中 pages.json 的配置</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp命令行创建项目.html"><strong aria-hidden="true">6.2.</strong> uniapp 命令行创建项目</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp拦截器.html"><strong aria-hidden="true">6.3.</strong> uniapp 拦截器</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp轮播图.html"><strong aria-hidden="true">6.4.</strong> uniapp 轮播图</a></li><li class="chapter-item expanded "><a href="../uniapp/vscode中的uniapp配置.html"><strong aria-hidden="true">6.5.</strong> vscode 中的 uniapp 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/index.html"><strong aria-hidden="true">7.</strong> Vue</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/index.html"><strong aria-hidden="true">7.1.</strong> Css3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/css3中的sticky定位.html"><strong aria-hidden="true">7.1.1.</strong> css3 中的 sticky 定位</a></li><li class="chapter-item expanded "><a href="../Vue/css3/css3中的伪类.html"><strong aria-hidden="true">7.1.2.</strong> css3 中的伪类</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/element-plus/index.html"><strong aria-hidden="true">7.2.</strong> ElementPlus</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus导入自定义主题色.html"><strong aria-hidden="true">7.2.1.</strong> element-plus 导入自定义主题色</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus表单校验.html"><strong aria-hidden="true">7.2.2.</strong> element-plus 表单校验</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus去除菜单下划线.html"><strong aria-hidden="true">7.2.3.</strong> element-plus 去除菜单下划线</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/error/index.html"><strong aria-hidden="true">7.3.</strong> Error</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/error/无法找到.vue.html"><strong aria-hidden="true">7.3.1.</strong> 无法找到.vue</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/js/index.html"><strong aria-hidden="true">7.4.</strong> Js</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/js/async和await的使用.html"><strong aria-hidden="true">7.4.1.</strong> async 和 await 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/es6模板字符串.html"><strong aria-hidden="true">7.4.2.</strong> es6 模板字符串</a></li><li class="chapter-item expanded "><a href="../Vue/js/export和export_default的区别.html"><strong aria-hidden="true">7.4.3.</strong> export 和 export_default 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/js/import的使用.html"><strong aria-hidden="true">7.4.4.</strong> import 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/js函数注释.html"><strong aria-hidden="true">7.4.5.</strong> js 函数注释</a></li><li class="chapter-item expanded "><a href="../Vue/js/js的可选链运算符.html"><strong aria-hidden="true">7.4.6.</strong> js 的可选链运算符</a></li><li class="chapter-item expanded "><a href="../Vue/js/promise函数的使用.html"><strong aria-hidden="true">7.4.7.</strong> promise 函数的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/pinia/index.html"><strong aria-hidden="true">7.5.</strong> Pinia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/pinia/pinia的信息存入LocalStorage.html"><strong aria-hidden="true">7.5.1.</strong> pinia 的信息存入 LocalStorage</a></li><li class="chapter-item expanded "><a href="../Vue/pinia/vue3中的pinia的使用.html"><strong aria-hidden="true">7.5.2.</strong> vue3 中的 pinia 的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/sass/index.html"><strong aria-hidden="true">7.6.</strong> Sass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/sass/sass中的%选择器.html"><strong aria-hidden="true">7.6.1.</strong> sass 中的%选择器</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue-router/index.html"><strong aria-hidden="true">7.7.</strong> VueRouter</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中keep-alive的使用.html"><strong aria-hidden="true">7.7.1.</strong> vue3 中 keep-alive 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中滚动行为scrollBehavior.html"><strong aria-hidden="true">7.7.2.</strong> vue3 中滚动行为 scrollBehavior</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中的router-view.html"><strong aria-hidden="true">7.7.3.</strong> vue3 中的 router-view</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中配置@别名.html"><strong aria-hidden="true">7.7.4.</strong> vue3 中配置@别名</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue2/index.html"><strong aria-hidden="true">7.8.</strong> Vue2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue2/vue2的sass-loader载入问题.html"><strong aria-hidden="true">7.8.1.</strong> vue2 的 sass-loader 载入问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2自定义登录组件.html"><strong aria-hidden="true">7.8.2.</strong> vue2 自定义登录组件</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2路由只能跳转一次问题.html"><strong aria-hidden="true">7.8.3.</strong> vue2 路由只能跳转一次问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2配置.html"><strong aria-hidden="true">7.8.4.</strong> vue2 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue3/index.html"><strong aria-hidden="true">7.9.</strong> Vue3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中hooks和pinia的区别.html"><strong aria-hidden="true">7.9.1.</strong> vue3 中 hooks 和 pinia 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中sass的使用.html"><strong aria-hidden="true">7.9.2.</strong> vue3 中 sass 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中slot和props的区别.html"><strong aria-hidden="true">7.9.3.</strong> vue3 中 slot 和 props 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中使用defineProps和defineEmits.html"><strong aria-hidden="true">7.9.4.</strong> vue3 中使用 defineProps 和 defineEmits</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的computed和watch方法.html"><strong aria-hidden="true">7.9.5.</strong> vue3 中的 computed 和 watch 方法</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的npm安装包.html"><strong aria-hidden="true">7.9.6.</strong> vue3 中的 npm 安装包</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的provide和inject.html"><strong aria-hidden="true">7.9.7.</strong> vue3 中的 provide 和 inject</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的scoped和v-deep.html"><strong aria-hidden="true">7.9.8.</strong> vue3 中的 scoped 和 v-deep</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用props传值.html"><strong aria-hidden="true">7.9.9.</strong> vue3 使用 props 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用slot传值.html"><strong aria-hidden="true">7.9.10.</strong> vue3 使用 slot 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3配置axios.html"><strong aria-hidden="true">7.9.11.</strong> vue3 配置 axios</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/单文件和多文件.html"><strong aria-hidden="true">7.9.12.</strong> 单文件和多文件</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/响应式和声明式.html"><strong aria-hidden="true">7.9.13.</strong> 响应式和声明式</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/选项式和组合式.html"><strong aria-hidden="true">7.9.14.</strong> 选项式和组合式</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueplugins/index.html"><strong aria-hidden="true">7.10.</strong> Vueplugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueplugins/图片放大镜效果.html"><strong aria-hidden="true">7.10.1.</strong> 图片放大镜效果</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueuse/index.html"><strong aria-hidden="true">7.11.</strong> Vueuse</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueuse/useIntersectionObserver.html"><strong aria-hidden="true">7.11.1.</strong> Use Intersection Observer</a></li><li class="chapter-item expanded "><a href="../Vue/vueuse/useScroll.html"><strong aria-hidden="true">7.11.2.</strong> Use Scroll</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/相关配置/index.html"><strong aria-hidden="true">7.12.</strong> 相关配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/相关配置/prettier格式化插件.html"><strong aria-hidden="true">7.12.1.</strong> prettier 格式化插件</a></li><li class="chapter-item expanded "><a href="../Vue/相关配置/设置路径src目录别名为@.html"><strong aria-hidden="true">7.12.2.</strong> 设置路径src目录别名为@</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Django/index.html"><strong aria-hidden="true">8.</strong> Django</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Django/Django.html"><strong aria-hidden="true">8.1.</strong> Django 的 bug</a></li><li class="chapter-item expanded "><a href="../Django/Drf用户认证.html"><strong aria-hidden="true">8.2.</strong> Drf 用户认证</a></li><li class="chapter-item expanded "><a href="../Django/Token详解.html"><strong aria-hidden="true">8.3.</strong> Token 详解</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/index.html"><strong aria-hidden="true">9.</strong> Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/index.html"><strong aria-hidden="true">9.1.</strong> Bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/gorm无法寻址.html"><strong aria-hidden="true">9.1.1.</strong> gorm 无法寻址</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gin/index.html"><strong aria-hidden="true">9.2.</strong> Gin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/Gin/gin实现热加载.html"><strong aria-hidden="true">9.2.1.</strong> gin 实现热加载</a></li><li class="chapter-item expanded "><a href="../Go/Gin/gin获取路径参数.html"><strong aria-hidden="true">9.2.2.</strong> gin 获取路径参数</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gorm/index.html"><strong aria-hidden="true">9.3.</strong> Gorm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对一.html"><strong aria-hidden="true">9.3.1.</strong> gorm 一对一</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对多.html"><strong aria-hidden="true">9.3.2.</strong> gorm 一对多</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm多态关联.html"><strong aria-hidden="true">9.3.3.</strong> gorm 多态关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的Many2Many.html"><strong aria-hidden="true">9.3.4.</strong> gorm 的 Many2Many</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的关联.html"><strong aria-hidden="true">9.3.5.</strong> gorm 的关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的多态关联和事务.html"><strong aria-hidden="true">9.3.6.</strong> gorm 的多态关联和事务</a></li><li class="chapter-item expanded "><a href="../Go/gorm/增删改查.html"><strong aria-hidden="true">9.3.7.</strong> 增删改查</a></li><li class="chapter-item expanded "><a href="../Go/gorm/连接mysql.html"><strong aria-hidden="true">9.3.8.</strong> 连接 mysql</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/go基础知识/index.html"><strong aria-hidden="true">9.4.</strong> go 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/go基础知识/go_get和go_install区别.html"><strong aria-hidden="true">9.4.1.</strong> go_get 和 go_install 区别</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go中结构体互转.html"><strong aria-hidden="true">9.4.2.</strong> go 中结构体互转</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go变量声明.html"><strong aria-hidden="true">9.4.3.</strong> go 变量声明</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go文件操作.html"><strong aria-hidden="true">9.4.4.</strong> go 文件操作</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go环境变量及配置.html"><strong aria-hidden="true">9.4.5.</strong> go 环境变量及配置</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go的printf占位符.html"><strong aria-hidden="true">9.4.6.</strong> go 的 printf 占位符</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Mysql/index.html"><strong aria-hidden="true">10.</strong> Mysql</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Mysql/数据库画er图.html"><strong aria-hidden="true">10.1.</strong> 数据库画 er 图</a></li><li class="chapter-item expanded "><a href="../Mysql/第三章作业.html"><strong aria-hidden="true">10.2.</strong> 第三章作业</a></li></ol></li><li class="chapter-item expanded "><a href="../openguass/index.html"><strong aria-hidden="true">11.</strong> Openguass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../openguass/postgresql增删改查.html"><strong aria-hidden="true">11.1.</strong> postgresql 增删改查</a></li><li class="chapter-item expanded "><a href="../openguass/postgresql文档.html"><strong aria-hidden="true">11.2.</strong> postgresql 文档</a></li><li class="chapter-item expanded "><a href="../openguass/创建openguass容器.html"><strong aria-hidden="true">11.3.</strong> 创建 openguass 容器</a></li><li class="chapter-item expanded "><a href="../openguass/数据库错题.html"><strong aria-hidden="true">11.4.</strong> 数据库错题</a></li><li class="chapter-item expanded "><a href="../openguass/第一次实验.html"><strong aria-hidden="true">11.5.</strong> 第一次实验</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">浩瀚星河</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="git命令操作大全"><a class="header" href="#git命令操作大全">git命令操作大全</a></h1>
+<h3 id="检查git版本"><a class="header" href="#检查git版本">检查git版本</a></h3>
+<pre><code class="language-css">git --version
+</code></pre>
+<h3 id="查看git相关命令"><a class="header" href="#查看git相关命令">查看git相关命令</a></h3>
+<pre><code class="language-bash">git --help
+</code></pre>
+<h3 id="查看当前的git配置信息"><a class="header" href="#查看当前的git配置信息">查看当前的git配置信息</a></h3>
+<pre><code class="language-lua">git config --list
+</code></pre>
+<h3 id="查看git用户名"><a class="header" href="#查看git用户名">查看git用户名</a></h3>
+<pre><code class="language-lua">git config user.name
+-查询⽬前git所使⽤的使⽤者名称
+git config --global user.name 名称
+
+注： --global 表示全局， 没有--global表示只设置在当前项目中的配置
+</code></pre>
+<h3 id="查看git邮箱"><a class="header" href="#查看git邮箱">查看git邮箱</a></h3>
+<pre><code class="language-lua">git config user.email
+-查询git所使⽤的email
+git config --global user.email
+</code></pre>
+<h3 id="设置-配置全局邮箱"><a class="header" href="#设置-配置全局邮箱">设置 （配置）全局邮箱</a></h3>
+<pre><code class="language-bash">git config --global user.email "eamil@qq.com"
+</code></pre>
+<h3 id="全局配置用户名设置git使者名称"><a class="header" href="#全局配置用户名设置git使者名称">全局配置用户名(设置git使⽤者名称)</a></h3>
+<pre><code class="language-bash">git config --global user.name "username"
+</code></pre>
+<h3 id="git对项目中的代码进行管理"><a class="header" href="#git对项目中的代码进行管理">git对项目中的代码进行管理</a></h3>
+<h5 id="初始化git储存"><a class="header" href="#初始化git储存">初始化git储存</a></h5>
+<pre><code class="language-csharp">git init
+</code></pre>
+<h5 id="需要提交的所有修改放到暂存区stage"><a class="header" href="#需要提交的所有修改放到暂存区stage">需要提交的所有修改放到暂存区（Stage）</a></h5>
+<pre><code class="language-csharp">git add *  //将工作区所有修改添加到暂存区
+git add .  //将工作区所有修改添加到暂存区
+git add &lt;file-name&gt; //将指定文件添加到暂存区
+git add *.js  //提交所有.js格式文件
+git add -f &lt;file-name&gt; // 强制添加 指定文件添加到暂存区
+注：&lt;file-name&gt;指的是文件的名称
+</code></pre>
+<h3 id="恢复后悔药"><a class="header" href="#恢复后悔药">恢复（后悔药）</a></h3>
+<p>将暂存区的文件恢复到工作区</p>
+<pre><code class="language-perl">git reset &lt;file-name&gt;           //从暂存区恢复指定到工作区
+git reset -- .                  //从暂存区恢复所有文件到工作区
+git reset --hard                // 把暂存区的修改退回到工作区
+</code></pre>
+<h3 id="查看工作区暂存区的状态"><a class="header" href="#查看工作区暂存区的状态">查看工作区、暂存区的状态</a></h3>
+<pre><code class="language-lua">git status
+</code></pre>
+<h3 id="移除暂存区的修改"><a class="header" href="#移除暂存区的修改">移除暂存区的修改</a></h3>
+<pre><code class="language-scss">git rm --cached &lt;file-name&gt;  //将本地暂存区的内容移除暂存区
+</code></pre>
+<h5 id="将缓存区的文件提交到本地仓库版本库-"><a class="header" href="#将缓存区的文件提交到本地仓库版本库-">将缓存区的文件，提交到本地仓库（版本库 ）</a></h5>
+<pre><code class="language-bash">git commit &lt;file-name&gt; ... "相关的记录信息" //将缓存区的指定文件提交到本地仓库
+git commit -m "相关的记录信息"        //将缓存区的所有文件提交到本地仓库
+git commit -am '相关的记录信息'       //跳过暂存区域直接提交更新并且添加备注的记录信息
+git commit --amend '相关的记录信息'   //使用一次新的commit，替代上一次提交，如果代码没有任何新变化，则用来修改上一次commit的提交记录信息
+</code></pre>
+<h3 id="撤销commit提交"><a class="header" href="#撤销commit提交">撤销commit提交</a></h3>
+<pre><code class="language-perl">git revert HEAD   //撤销最近的一个提交(创建了一个撤销上次提交(HEAD)的新提交)
+git reset --soft HEAD^
+注意：Windows系统需要在^符号后面两边加上引号，如：
+git reset --soft HEAD"^"
+
+git revert HEAD^   //撤销上上次的提交
+</code></pre>
+<h3 id="查看日志"><a class="header" href="#查看日志">查看日志</a></h3>
+<h5 id="查看历史提交commit记录"><a class="header" href="#查看历史提交commit记录">查看历史提交(commit)记录</a></h5>
+<pre><code class="language-c">git log    //查看历史commit记录
+注：空格向下翻页，b向上翻页，q退出
+git log --oneline  //以简洁的一行显示，包含简洁哈希索引值
+git log --pretty=oneline //查看日志且并且显示版本
+git log --stat     //显示每个commit中哪些文件被修改,分别添加或删除了多少行
+</code></pre>
+<h5 id="查看分支合并图"><a class="header" href="#查看分支合并图">查看分支合并图</a></h5>
+<pre><code class="language-lua">git log --graph
+</code></pre>
+<h5 id="查看版本线图"><a class="header" href="#查看版本线图">查看版本线图</a></h5>
+<pre><code class="language-css">git log --oneline --graph
+</code></pre>
+<h3 id="git版本控制时光机"><a class="header" href="#git版本控制时光机">git版本控制（时光机）</a></h3>
+<h5 id="回到指定哈希值对应的版本"><a class="header" href="#回到指定哈希值对应的版本">回到指定哈希值对应的版本</a></h5>
+<pre><code class="language-ruby">git reset --hard &lt;Hash&gt; // 回滚到需要的版本  (回滚了仓库,暂存区,暂存区,工作区)
+注:&lt;Hash&gt; 是版本的哈希值
+git reset --hard HEAD     //强制工作区、暂存区、本地库为当前HEAD指针所在的版本
+</code></pre>
+<h5 id="版本回退"><a class="header" href="#版本回退">版本回退</a></h5>
+<pre><code class="language-scss">git reset --hard HEAD~1          //后退一个版本
+注：~后面的数字表示回退多少个版本
+</code></pre>
+<h4 id="其他版本回退"><a class="header" href="#其他版本回退">其他版本回退</a></h4>
+<pre><code class="language-bash">git reset --mixed &lt;Hash&gt; // 回滚到需要的版本  (回滚了仓库,暂存区)
+git reset --soft &lt;Hash&gt; // 回退到需要的版本 （只回滚到本地仓库）
+</code></pre>
+<h3 id="分支"><a class="header" href="#分支">分支</a></h3>
+<h5 id="查看分支"><a class="header" href="#查看分支">查看分支</a></h5>
+<pre><code class="language-scss">git branch              //查看所有本地分支
+git branch -r          //查看所有远程分支
+git branch -a         //查看所有远程分支和本地分支
+git branch --merged  //查看已经合并的分支
+</code></pre>
+<h5 id="创建分支依然停留在当前的分支"><a class="header" href="#创建分支依然停留在当前的分支">创建分支（依然停留在当前的分支）</a></h5>
+<pre><code class="language-xml">git branch &lt;branch-name&gt;
+注: &lt;branch-name&gt; 是分支的名称
+</code></pre>
+<h5 id="切换分支"><a class="header" href="#切换分支">切换分支</a></h5>
+<pre><code class="language-js">git checKout &lt;branch-name&gt;    //切换到指定分支，并更新工作区
+git checkout -         //切换到上一个分支
+</code></pre>
+<h5 id="创建并切换分支创建一个新的分支并切换到这个新建的分支上"><a class="header" href="#创建并切换分支创建一个新的分支并切换到这个新建的分支上">创建并切换分支（创建一个新的分支，并切换到这个新建的分支上）</a></h5>
+<pre><code class="language-css">git checkout -b &lt;branch-name&gt;
+</code></pre>
+<h5 id="合并分支合并某一个分支到当前分支"><a class="header" href="#合并分支合并某一个分支到当前分支">合并分支（合并某一个分支到当前分支）</a></h5>
+<pre><code class="language-js">git merge &lt;branch-name&gt;
+</code></pre>
+<h5 id="删除分支"><a class="header" href="#删除分支">删除分支</a></h5>
+<pre><code class="language-js">git branch -d &lt;branch-name&gt;    //只能删除已经被当前分支合并的分支
+git branch -D &lt;&gt;branch-name&gt;   //强制删除分支
+</code></pre>
+<h5 id="删除远程分支"><a class="header" href="#删除远程分支">删除远程分支</a></h5>
+<pre><code class="language-perl">git push origin --delete  &lt;remote-branch-name&gt;
+注：&lt;remote-branch-name&gt; 远程分支名
+</code></pre>
+<h4 id="git修改本地分支名和远程分支名"><a class="header" href="#git修改本地分支名和远程分支名">git修改本地分支名和远程分支名</a></h4>
+<h3 id="远程仓库团队协作"><a class="header" href="#远程仓库团队协作">远程仓库（团队协作）</a></h3>
+<h5 id="克隆远程仓库从远程仓库拉取代码"><a class="header" href="#克隆远程仓库从远程仓库拉取代码">克隆远程仓库（从远程仓库拉取代码）</a></h5>
+<pre><code class="language-perl">git clone &lt;url&gt;
+注：&lt;url&gt;   远程仓库的地址
+</code></pre>
+<h5 id="本地库与远程库进行关联"><a class="header" href="#本地库与远程库进行关联">本地库与远程库进行关联</a></h5>
+<pre><code class="language-perl">git remote add origin &lt;url&gt;
+注：&lt;url&gt;   远程仓库的地址
+</code></pre>
+<h5 id="查看远程仓库地址别名"><a class="header" href="#查看远程仓库地址别名">查看远程仓库地址别名</a></h5>
+<pre><code class="language-bash">git remote -v
+</code></pre>
+<h5 id="新建远程仓库地址别名"><a class="header" href="#新建远程仓库地址别名">新建远程仓库地址别名</a></h5>
+<pre><code class="language-ruby">git remote add &lt;alias&gt; &lt;url&gt;
+注:&lt;alias&gt; 远程仓库的别名
+   &lt;url&gt;   远程仓库的地址
+</code></pre>
+<h5 id="删除本地仓库中的远程仓库别名"><a class="header" href="#删除本地仓库中的远程仓库别名">删除本地仓库中的远程仓库别名</a></h5>
+<pre><code class="language-ruby">git remote rm &lt;alias&gt;
+注:&lt;alias&gt; 远程仓库的别名
+复制代码
+</code></pre>
+<h5 id="重命名远程仓库地址别名"><a class="header" href="#重命名远程仓库地址别名">重命名远程仓库地址别名</a></h5>
+<pre><code class="language-perl"> git remote rename &lt;old-alias&gt; &lt;new-alias&gt;
+ 注：&lt;old-alias&gt;  旧的远程仓库
+    &lt;new-alias&gt;  新的远程仓库
+</code></pre>
+<h5 id="把远程库的修改拉取到本地"><a class="header" href="#把远程库的修改拉取到本地">把远程库的修改拉取到本地</a></h5>
+<pre><code class="language-perl">git fetch &lt;alias/url&gt; &lt;remote-branch-name&gt;     //抓取远程仓库的指定分支到本地，但没有合并
+git merge &lt;alias-branch-name&gt;                //将抓取下来的远程的分支，跟当前所在分支进行合并
+git pull &lt;alias/url&gt; &lt;remote-branch-name&gt;    //拉取到本地，并且与当前所在的分支进行合并
+
+注:&lt;alias/url&gt; 远程仓库的别名 或者是 远程仓库地址
+   &lt;remote-branch-name&gt; 远程分支名
+</code></pre>
+<h5 id="将本地的分支推送到远程仓库"><a class="header" href="#将本地的分支推送到远程仓库">将本地的分支推送到远程仓库</a></h5>
+<p>提示！：<strong>在推送前要先拉取哦</strong>  <code>git pull</code></p>
+<pre><code class="language-perl">git push &lt;alias/url&gt; &lt;branch-name&gt;     //将本地的每个分支推送到远程仓库
+git push &lt;alias/url&gt; --force             //强行推送 当前分支到远程仓库，即使有冲突
+git push &lt;alias/url&gt; --all              //推送所有本地分支到远程仓库
+
+注:&lt;alias/url&gt; 远程仓库的别名 或者是 远程仓库地址
+   &lt;branch-name&gt;  本地分支名
+</code></pre>
+<h3 id="查看配置信息"><a class="header" href="#查看配置信息">查看配置信息</a></h3>
+<h4 id="查看全局配置信息"><a class="header" href="#查看全局配置信息">查看全局配置信息</a></h4>
+<p><code>git config --list --global</code></p>
+<p><img src="./img/gitconfig1.png" alt="gitconfig1" /></p>
+<h4 id="查看本地仓库配置信息"><a class="header" href="#查看本地仓库配置信息">查看本地仓库配置信息</a></h4>
+<p><code>git config --list --local</code></p>
+<p><img src="./img/gitconfig2.png" alt="gitconfig1" /></p>
+<h4 id="查看系统配置信息"><a class="header" href="#查看系统配置信息">查看系统配置信息</a></h4>
+<p><code>git config --list --system</code></p>
+<p><img src="./img/gitconfig3.png" alt="gitconfig1" /></p>
+<h4 id="查看所有配置信息"><a class="header" href="#查看所有配置信息">查看所有配置信息</a></h4>
+<p><code>git config --list</code></p>
+<p><img src="./img/gitconfig4.png" alt="gitconfig1" /></p>
+<h3 id="git-rebase详解"><a class="header" href="#git-rebase详解">git rebase详解</a></h3>
+<h4 id="第一个作用合并commit提交"><a class="header" href="#第一个作用合并commit提交">第一个作用：合并commit提交</a></h4>
+<p>一般情况下，我们进行开发时，都是从master分支拉一个自己的开发分支，进行代码修改操作，再<code>git add</code>以及<code>git commit</code>之后将我们修改好的代码<code>git push</code>到远程仓库。</p>
+<p>但是，很多情况下，我们并不会仅仅在本地<code>git commit</code>一次，而是会执行很多次，而我们知道，每一个的<code>git commit</code>都会形成一个git节点，而如果我们把这些节点都push到远端，就会使项目的git日志很乱，因为你的这些commit对于其他同学来说都仅仅是为了完成你对应的修改工作，他们希望的是，你能在一次commit操作中把你的修改全部完成，这时，就可以用到我们的<code>git rebase</code>操作了，在<code>git push</code>之前，我们可以将几次本地的commit操作合并，这样，我们推送到远端的commit操作就只有一个了，更利于<a href="https://so.csdn.net/so/search?q=%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86&amp;spm=1001.2101.3001.7020">项目管理</a>。</p>
+<p><a href="https://so.csdn.net/so/search?q=rebase&amp;spm=1001.2101.3001.7020">rebase</a>为<strong>变基</strong>，git rebase -i 命令可以压缩合并多次提交，执行<code>git rebase i hash</code>就可以进行变基。</p>
+<p><img src="./img/gitrebase1.png" alt="gitrebase1" /></p>
+<p>则会根据你设置的git默认编辑器打开我们需要修改的地方，我这里默认是vim，你也可以设置成其他</p>
+<p><img src="./img/gitrebase3.png" alt="gitrebase3" /></p>
+<p>这个是里面的提示：</p>
+<ul>
+<li>pick：保留该commit（缩写:p）</li>
+<li>reword：保留该commit，但我需要修改该commit的注释（缩写:r）</li>
+<li>edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）</li>
+<li>squash：将该commit和前一个commit合并（缩写:s）用的比较多</li>
+<li>fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）</li>
+<li>exec：执行shell命令（缩写:x）</li>
+<li>drop：我要丢弃该commit（缩写:d）</li>
+</ul>
+<p>根据自己的需要修改commit信息</p>
+<p><img src="./img/gitrebase2.png" alt="gitrebase2" /></p>
+<p><img src="./img/gitrebase6.png" alt="gitrebase2" /></p>
+<p>我这里修改了commit信息，想着是合并的，但是前面没有截图，是向把最近两条commit信息合并为一条的。进入了vim直接进行编辑修改commit信息，修改完成后保存退出，就会出现如下信息。</p>
+<p><img src="./img/gitrebase4.png" alt="gitrebase4" /></p>
+<p>出现如下信息代表修改成功，我们git log查看是否成功</p>
+<p><img src="./img/gitrebase5.png" alt="gitrebase5" /></p>
+<p>修改成功，以前我们本地原本有两条commit信息，如果push到远端就是两条commit提交记录，修改后，push到远端，只会显示一条，这个是git rebase的第一个作用。</p>
+<h4 id="第二个作用合并分支"><a class="header" href="#第二个作用合并分支">第二个作用：合并分支</a></h4>
+<p>我们在日常开发中已经知道了<code>git merge 分支名</code>可以合并代码，为什么我们还要使用<code>git rebase 分支名</code>合并代码呢？这两者肯定是有所不同的，接下来我们就来探讨一下两者的不同点。</p>
+<p>首先我们在master分支上修改了代码，然后使用<code>git status</code>查看我们是否修改了</p>
+<p><img src="./img/gitrebase9.png" alt="gitrebase9" /></p>
+<p>证明我们修改了master分支的代码，然后我们提交并push到远程。</p>
+<p><img src="./img/gitrebase10.png" alt="gitrebase10" /></p>
+<p>我们知道，我们现在master分支的代码是最新的，但是我们dev分支的代码还不是最新的，因此我们需要把dev分支的代码更新到最新状态，如果dev分支的代码有所改动，我们可以使用<code>git stash</code>先存在git栈中，然后使用<code>git merge master</code>合并master分支的代码到dev分支。</p>
+<p><img src="./img/gitrebase8.png" alt="gitrebase8" /></p>
+<p>合并完成后，我们发现在dev分支多了一条合并master分支的代码到dev分支的git记录，有所区别的地方就在这里了，<code>git rebase 分支名</code>就不会出现这一条合并的记录。</p>
+<hr />
+<p>其他理解：我们先从 <code>master</code> 分支切出一个 <code>dev</code> 分支，进行开发：</p>
+<p><img src="./img/checkoutbranch.png" alt="checkoutbranch" /></p>
+<p>其他同学完成了一次 <code>hotfix</code>，并合并入了 <code>master</code> 分支，此时 <code>master</code> 已经领先于你的 <code>dev</code>分支了：</p>
+<p><img src="./img/checkoutbranch1.png" alt="checkoutbranch1" /></p>
+<p>使用 <code>rebase</code> 来同步其他同学修改的结果，来保证自己的代码是最新的版本</p>
+<p><img src="./img/checkoutbranch2.png" alt="checkoutbranch2" /></p>
+<p><code>git rebase</code> 做了什么操作呢？</p>
+<p>首先，<code>git</code> 会把 <code>dev</code> 分支里面的每个 <code>commit</code> 取消掉；
+其次，把上面的操作临时保存成 <code>patch</code> 文件，存在 <code>.git/rebase</code> 目录下；
+然后，把 <code>dev</code> 分支更新到最新的 <code>master</code> 分支；
+最后，把上面保存的 <code>patch</code> 文件应用到 <code>dev</code> 分支上。</p>
+<p>在 <code>rebase</code> 的过程中，也许会出现冲突 <code>conflict</code>。在这种情况，<code>git</code> 会停止 <code>rebase</code> 并会让你去解决冲突。在解决完冲突后，用 <code>git add</code> 命令去更新这些内容。注意，你无需执行 <code>git commit-m 'xxx'</code>，只要执行 <code>git rebase continue</code></p>
+<p>这样 <code>git</code> 会继续应用余下的 <code>patch</code> 补丁文件。在任何时候，我们都可以用 <code>--abort</code> 参数来终止 <code>rebase</code> 的行动，并且分支会回到 <code>rebase</code> 开始前的状态。</p>
+<blockquote>
+<p>根据上文来看，<code>git-rebase</code> 很完美，解决了我们的两个问题：
+1.合并 <code>commit</code> 记录，保持分支整洁；
+2.相比 <code>merge</code> 来说会减少分支合并的记录；</p>
+<p>缺点就是：</p>
+<ol>
+<li>如果你的分支不只有你在进行开发，那么<code>git-rebase</code>可能会导致提交记录的丢失。</li>
+</ol>
+</blockquote>
+<h3 id="git仓库中添加子仓库"><a class="header" href="#git仓库中添加子仓库">git仓库中添加子仓库</a></h3>
+<p>如果你在你的携带git仓库的目录下，有子git仓库，那么你执行<code>git add .</code>的时候，会出现<code>“You've added another git repository inside your current repository."</code>的报错。</p>
+<p>可以这么处理：</p>
+<p>首先，建议你的远程仓库的命名跟子仓库相同，这样不会有两个仓库存在，或许你可以配置.gitignore去解决这个问题，但是不建议这么做，会比较繁琐。</p>
+<ul>
+<li>
+<p>添加子仓库地址</p>
+<pre><code class="language-bash">git submodule add 你的子仓库的地址
+# 也就是上面所说，如果的你子仓库命名和本地目录下的不一样，就会克隆一个项目下来，多了一层结构，如果相同
+</code></pre>
+<p>如果出现<code>xxx already exists in the index</code>提示，请使用如下命令，清除缓存：</p>
+<pre><code class="language-bash">git rm -r --cached 文件名
+</code></pre>
+</li>
+<li>
+<p>到父级仓库进行提交即可</p>
+<pre><code class="language-bash">git add .
+git commit -m "xxx"
+</code></pre>
+</li>
+</ul>
+<p>注意，成功后你得父级会生成<code>.gitmodules</code>文件</p>
+<pre><code class="language-js">[submodule "jira-project"]
+    path = jira-project
+    url = https://gitee.com/zzb1049/jira-project.git
+[submodule "Rudex/redux-learning"]
+    path = Rudex/redux-learning
+    url = https://gitee.com/zzb1049/redux-learning.git
+[submodule "React/react-pratice"]
+    path = React/react-pratice
+    url = https://gitee.com/zzb1049/react-pratice.git
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Git/git创建补丁.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Git/git在Jetbrains中的使用.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Git/git创建补丁.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Git/git在Jetbrains中的使用.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

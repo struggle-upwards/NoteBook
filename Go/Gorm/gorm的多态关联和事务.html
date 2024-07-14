@@ -1,0 +1,820 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>gorm 的多态关联和事务 - 浩瀚星河</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> 首页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../操作系统/index.html"><strong aria-hidden="true">2.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../操作系统/操作系统的定义.html"><strong aria-hidden="true">2.1.</strong> 操作系统的定义</a></li><li class="chapter-item expanded "><a href="../../操作系统/进程.html"><strong aria-hidden="true">2.2.</strong> 进程</a></li><li class="chapter-item expanded "><a href="../../操作系统/操作系统总结.html"><strong aria-hidden="true">2.3.</strong> 操作系统总结</a></li><li class="chapter-item expanded "><a href="../../操作系统/Linux指令.html"><strong aria-hidden="true">2.4.</strong> Linux 指令</a></li></ol></li><li class="chapter-item expanded "><a href="../../Git/index.html"><strong aria-hidden="true">3.</strong> Git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Git/git创建补丁.html"><strong aria-hidden="true">3.1.</strong> git 创建补丁</a></li><li class="chapter-item expanded "><a href="../../Git/git命令.html"><strong aria-hidden="true">3.2.</strong> git 命令</a></li><li class="chapter-item expanded "><a href="../../Git/git在Jetbrains中的使用.html"><strong aria-hidden="true">3.3.</strong> git 在 Jetbrains 中的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Docker/index.html"><strong aria-hidden="true">4.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Docker/GVC配置.html"><strong aria-hidden="true">4.1.</strong> GVC配置</a></li><li class="chapter-item expanded "><a href="../../Docker/blog-readme.html"><strong aria-hidden="true">4.2.</strong> Blog Readme</a></li><li class="chapter-item expanded "><a href="../../Docker/docker-compose命令.html"><strong aria-hidden="true">4.3.</strong> docker-compose 命令</a></li><li class="chapter-item expanded "><a href="../../Docker/docker命令.html"><strong aria-hidden="true">4.4.</strong> docker 命令</a></li><li class="chapter-item expanded "><a href="../../Docker/docker部署gin,vue博客.html"><strong aria-hidden="true">4.5.</strong> docker 部署 gin,vue 博客</a></li><li class="chapter-item expanded "><a href="../../Docker/docker部署ollama.html"><strong aria-hidden="true">4.6.</strong> docker 部署 ollama</a></li><li class="chapter-item expanded "><a href="../../Docker/gin-vue-community.html"><strong aria-hidden="true">4.7.</strong> Gin Vue Community</a></li><li class="chapter-item expanded "><a href="../../Docker/数据库的设计.html"><strong aria-hidden="true">4.8.</strong> 数据库的设计</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../Typescript/index.html"><strong aria-hidden="true">5.</strong> Typescript</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/index.html"><strong aria-hidden="true">5.1.</strong> 一.变量的类型</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中哪些判断条件是true,哪些是false.html"><strong aria-hidden="true">5.1.1.</strong> ts 中哪些判断条件是 true,哪些是 false</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的基本类型.html"><strong aria-hidden="true">5.1.2.</strong> ts 中的基本类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中变量的任意类型.html"><strong aria-hidden="true">5.1.3.</strong> ts 中变量的任意类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的Object和object.html"><strong aria-hidden="true">5.1.4.</strong> ts 中的 Object 和 object</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的接口和对象类型.html"><strong aria-hidden="true">5.1.5.</strong> ts 中的接口和对象类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的数组类型.html"><strong aria-hidden="true">5.1.6.</strong> ts 中的数组类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的函数类型.html"><strong aria-hidden="true">5.1.7.</strong> ts 中的函数类型</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../uniapp/index.html"><strong aria-hidden="true">6.</strong> Uniapp</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../uniapp/uniapp中pages.json的配置.html"><strong aria-hidden="true">6.1.</strong> uniapp 中 pages.json 的配置</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp命令行创建项目.html"><strong aria-hidden="true">6.2.</strong> uniapp 命令行创建项目</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp拦截器.html"><strong aria-hidden="true">6.3.</strong> uniapp 拦截器</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp轮播图.html"><strong aria-hidden="true">6.4.</strong> uniapp 轮播图</a></li><li class="chapter-item expanded "><a href="../../uniapp/vscode中的uniapp配置.html"><strong aria-hidden="true">6.5.</strong> vscode 中的 uniapp 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/index.html"><strong aria-hidden="true">7.</strong> Vue</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/css3/index.html"><strong aria-hidden="true">7.1.</strong> Css3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/css3/css3中的sticky定位.html"><strong aria-hidden="true">7.1.1.</strong> css3 中的 sticky 定位</a></li><li class="chapter-item expanded "><a href="../../Vue/css3/css3中的伪类.html"><strong aria-hidden="true">7.1.2.</strong> css3 中的伪类</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/index.html"><strong aria-hidden="true">7.2.</strong> ElementPlus</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus导入自定义主题色.html"><strong aria-hidden="true">7.2.1.</strong> element-plus 导入自定义主题色</a></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus表单校验.html"><strong aria-hidden="true">7.2.2.</strong> element-plus 表单校验</a></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus去除菜单下划线.html"><strong aria-hidden="true">7.2.3.</strong> element-plus 去除菜单下划线</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/error/index.html"><strong aria-hidden="true">7.3.</strong> Error</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/error/无法找到.vue.html"><strong aria-hidden="true">7.3.1.</strong> 无法找到.vue</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/js/index.html"><strong aria-hidden="true">7.4.</strong> Js</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/js/async和await的使用.html"><strong aria-hidden="true">7.4.1.</strong> async 和 await 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/js/es6模板字符串.html"><strong aria-hidden="true">7.4.2.</strong> es6 模板字符串</a></li><li class="chapter-item expanded "><a href="../../Vue/js/export和export_default的区别.html"><strong aria-hidden="true">7.4.3.</strong> export 和 export_default 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/js/import的使用.html"><strong aria-hidden="true">7.4.4.</strong> import 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/js/js函数注释.html"><strong aria-hidden="true">7.4.5.</strong> js 函数注释</a></li><li class="chapter-item expanded "><a href="../../Vue/js/js的可选链运算符.html"><strong aria-hidden="true">7.4.6.</strong> js 的可选链运算符</a></li><li class="chapter-item expanded "><a href="../../Vue/js/promise函数的使用.html"><strong aria-hidden="true">7.4.7.</strong> promise 函数的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/pinia/index.html"><strong aria-hidden="true">7.5.</strong> Pinia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/pinia/pinia的信息存入LocalStorage.html"><strong aria-hidden="true">7.5.1.</strong> pinia 的信息存入 LocalStorage</a></li><li class="chapter-item expanded "><a href="../../Vue/pinia/vue3中的pinia的使用.html"><strong aria-hidden="true">7.5.2.</strong> vue3 中的 pinia 的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/sass/index.html"><strong aria-hidden="true">7.6.</strong> Sass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/sass/sass中的%选择器.html"><strong aria-hidden="true">7.6.1.</strong> sass 中的%选择器</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/index.html"><strong aria-hidden="true">7.7.</strong> VueRouter</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中keep-alive的使用.html"><strong aria-hidden="true">7.7.1.</strong> vue3 中 keep-alive 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中滚动行为scrollBehavior.html"><strong aria-hidden="true">7.7.2.</strong> vue3 中滚动行为 scrollBehavior</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中的router-view.html"><strong aria-hidden="true">7.7.3.</strong> vue3 中的 router-view</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中配置@别名.html"><strong aria-hidden="true">7.7.4.</strong> vue3 中配置@别名</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue2/index.html"><strong aria-hidden="true">7.8.</strong> Vue2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2的sass-loader载入问题.html"><strong aria-hidden="true">7.8.1.</strong> vue2 的 sass-loader 载入问题</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2自定义登录组件.html"><strong aria-hidden="true">7.8.2.</strong> vue2 自定义登录组件</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2路由只能跳转一次问题.html"><strong aria-hidden="true">7.8.3.</strong> vue2 路由只能跳转一次问题</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2配置.html"><strong aria-hidden="true">7.8.4.</strong> vue2 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue3/index.html"><strong aria-hidden="true">7.9.</strong> Vue3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中hooks和pinia的区别.html"><strong aria-hidden="true">7.9.1.</strong> vue3 中 hooks 和 pinia 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中sass的使用.html"><strong aria-hidden="true">7.9.2.</strong> vue3 中 sass 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中slot和props的区别.html"><strong aria-hidden="true">7.9.3.</strong> vue3 中 slot 和 props 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中使用defineProps和defineEmits.html"><strong aria-hidden="true">7.9.4.</strong> vue3 中使用 defineProps 和 defineEmits</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的computed和watch方法.html"><strong aria-hidden="true">7.9.5.</strong> vue3 中的 computed 和 watch 方法</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的npm安装包.html"><strong aria-hidden="true">7.9.6.</strong> vue3 中的 npm 安装包</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的provide和inject.html"><strong aria-hidden="true">7.9.7.</strong> vue3 中的 provide 和 inject</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的scoped和v-deep.html"><strong aria-hidden="true">7.9.8.</strong> vue3 中的 scoped 和 v-deep</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3使用props传值.html"><strong aria-hidden="true">7.9.9.</strong> vue3 使用 props 传值</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3使用slot传值.html"><strong aria-hidden="true">7.9.10.</strong> vue3 使用 slot 传值</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3配置axios.html"><strong aria-hidden="true">7.9.11.</strong> vue3 配置 axios</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/单文件和多文件.html"><strong aria-hidden="true">7.9.12.</strong> 单文件和多文件</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/响应式和声明式.html"><strong aria-hidden="true">7.9.13.</strong> 响应式和声明式</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/选项式和组合式.html"><strong aria-hidden="true">7.9.14.</strong> 选项式和组合式</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vueplugins/index.html"><strong aria-hidden="true">7.10.</strong> Vueplugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vueplugins/图片放大镜效果.html"><strong aria-hidden="true">7.10.1.</strong> 图片放大镜效果</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vueuse/index.html"><strong aria-hidden="true">7.11.</strong> Vueuse</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vueuse/useIntersectionObserver.html"><strong aria-hidden="true">7.11.1.</strong> Use Intersection Observer</a></li><li class="chapter-item expanded "><a href="../../Vue/vueuse/useScroll.html"><strong aria-hidden="true">7.11.2.</strong> Use Scroll</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/相关配置/index.html"><strong aria-hidden="true">7.12.</strong> 相关配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/相关配置/prettier格式化插件.html"><strong aria-hidden="true">7.12.1.</strong> prettier 格式化插件</a></li><li class="chapter-item expanded "><a href="../../Vue/相关配置/设置路径src目录别名为@.html"><strong aria-hidden="true">7.12.2.</strong> 设置路径src目录别名为@</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../Django/index.html"><strong aria-hidden="true">8.</strong> Django</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Django/Django.html"><strong aria-hidden="true">8.1.</strong> Django 的 bug</a></li><li class="chapter-item expanded "><a href="../../Django/Drf用户认证.html"><strong aria-hidden="true">8.2.</strong> Drf 用户认证</a></li><li class="chapter-item expanded "><a href="../../Django/Token详解.html"><strong aria-hidden="true">8.3.</strong> Token 详解</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/index.html"><strong aria-hidden="true">9.</strong> Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/bug/index.html"><strong aria-hidden="true">9.1.</strong> Bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/bug/gorm无法寻址.html"><strong aria-hidden="true">9.1.1.</strong> gorm 无法寻址</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/Gin/index.html"><strong aria-hidden="true">9.2.</strong> Gin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/Gin/gin实现热加载.html"><strong aria-hidden="true">9.2.1.</strong> gin 实现热加载</a></li><li class="chapter-item expanded "><a href="../../Go/Gin/gin获取路径参数.html"><strong aria-hidden="true">9.2.2.</strong> gin 获取路径参数</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/Gorm/index.html"><strong aria-hidden="true">9.3.</strong> Gorm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/gorm/gorm一对一.html"><strong aria-hidden="true">9.3.1.</strong> gorm 一对一</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm一对多.html"><strong aria-hidden="true">9.3.2.</strong> gorm 一对多</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm多态关联.html"><strong aria-hidden="true">9.3.3.</strong> gorm 多态关联</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的Many2Many.html"><strong aria-hidden="true">9.3.4.</strong> gorm 的 Many2Many</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的关联.html"><strong aria-hidden="true">9.3.5.</strong> gorm 的关联</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的多态关联和事务.html" class="active"><strong aria-hidden="true">9.3.6.</strong> gorm 的多态关联和事务</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/增删改查.html"><strong aria-hidden="true">9.3.7.</strong> 增删改查</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/连接mysql.html"><strong aria-hidden="true">9.3.8.</strong> 连接 mysql</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/index.html"><strong aria-hidden="true">9.4.</strong> go 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/go基础知识/go_get和go_install区别.html"><strong aria-hidden="true">9.4.1.</strong> go_get 和 go_install 区别</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go中结构体互转.html"><strong aria-hidden="true">9.4.2.</strong> go 中结构体互转</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go变量声明.html"><strong aria-hidden="true">9.4.3.</strong> go 变量声明</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go文件操作.html"><strong aria-hidden="true">9.4.4.</strong> go 文件操作</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go环境变量及配置.html"><strong aria-hidden="true">9.4.5.</strong> go 环境变量及配置</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go的printf占位符.html"><strong aria-hidden="true">9.4.6.</strong> go 的 printf 占位符</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Mysql/index.html"><strong aria-hidden="true">10.</strong> Mysql</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Mysql/数据库画er图.html"><strong aria-hidden="true">10.1.</strong> 数据库画 er 图</a></li><li class="chapter-item expanded "><a href="../../Mysql/第三章作业.html"><strong aria-hidden="true">10.2.</strong> 第三章作业</a></li></ol></li><li class="chapter-item expanded "><a href="../../openguass/index.html"><strong aria-hidden="true">11.</strong> Openguass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../openguass/postgresql增删改查.html"><strong aria-hidden="true">11.1.</strong> postgresql 增删改查</a></li><li class="chapter-item expanded "><a href="../../openguass/postgresql文档.html"><strong aria-hidden="true">11.2.</strong> postgresql 文档</a></li><li class="chapter-item expanded "><a href="../../openguass/创建openguass容器.html"><strong aria-hidden="true">11.3.</strong> 创建 openguass 容器</a></li><li class="chapter-item expanded "><a href="../../openguass/数据库错题.html"><strong aria-hidden="true">11.4.</strong> 数据库错题</a></li><li class="chapter-item expanded "><a href="../../openguass/第一次实验.html"><strong aria-hidden="true">11.5.</strong> 第一次实验</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">浩瀚星河</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="gorm-学习五进阶多态关联关联标签以及事务"><a class="header" href="#gorm-学习五进阶多态关联关联标签以及事务">Gorm 学习（五）进阶：多态关联、关联标签以及事务</a></h1>
+<h4 id="目录"><a class="header" href="#目录">目录</a></h4>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<blockquote>
+<p>感谢开源项目，以及 本人学识尚浅，如有错误，请评论指出，谢谢！ 详细可见个人博客：</p>
+</blockquote>
+<h2 id="一多态关联"><a class="header" href="#一多态关联">一、多态关联</a></h2>
+<h3 id="1多态关联概述"><a class="header" href="#1多态关联概述">1、多态关联概述</a></h3>
+<p>什么是多态？</p>
+<p>多态的概念：通俗来说，就是多种形态，具体点就是去完成某个行为，当不同的对象去完成时会产生出不同的状态。</p>
+<p>什么是多态表？ 假设我们有一张地址表，其中的地址可能是来自 User 中的，也可能是来自 Orders 中的。而区分不同的对象则用 type 字段。如：type=User 时对象是文章表。</p>
+<img src="img/c9e6b9ae62cc46ec98e16cc1b551a15f-1716901678047-1.png" alt="在这里插入图片描述">
+<h3 id="2为什么用多态关联"><a class="header" href="#2为什么用多态关联">2、为什么用多态关联？</a></h3>
+<p>出现需要外键引用多个表的情况，不可能删除原来表结构，重新添加一个外键 ID 再建表，所以我们可以建立一个交叉表。让 Addres 不再依赖于 User 表或者 Order 表。 <img src="img/a35bad81e6f04d9ababfc8967d32e78a-1716901678047-3.png" alt="在这里插入图片描述"></p>
+<p><code>has one</code>的情况解决方案，如果我们希望一个给定的地址，只能够在一张交叉表中出现一次，上面的复合主键已经做到了。</p>
+<p><code>has many</code>的情况解决方案,如果希望一个地址可以在一张交叉表中出现多次，可以取消 Address 的复合主键。</p>
+<h3 id="3has-one"><a class="header" href="#3has-one">3、Has One</a></h3>
+<p>GORM 为 <code>has one</code> 和 <code>has many</code> 提供了多态关联支持，它会将拥有者实体的表名、主键值都保存到多态类型的字段中。</p>
+<pre><code class="language-go">type User struct {
+	ID      int
+	Name    string
+	//polymorphic指定多态类型，比如模型名
+	Address Address `gorm:"polymorphic:Owner;"`
+}
+
+type Order struct {
+	ID      int
+	Name    string
+	Address Address `gorm:"polymorphic:Owner;"`
+}
+
+type Address struct {
+	ID        int
+	Name      string
+	OwnerID   int
+	OwnerType string
+}
+
+func main() {
+	db.AutoMigrate(User{}, Order{}, Address{})
+}
+</code></pre>
+<img src="img/42109d8b5dc4428584c4aee5a60cd638-1716901678048-5.png" alt="在这里插入图片描述">
+<pre><code class="language-go">db.Create(User{
+	Name: "linzy",
+	Address: Address{
+		Name: "翻斗花园",
+	},
+})
+db.Create(Order{
+	Name: "忘崽牛奶",
+	Address: Address{
+		Name: "火星幼儿园",
+	},
+})
+</code></pre>
+<img src="img/f21222a9265c4f6b83dec8289e8903bc.png" alt="在这里插入图片描述"> 
+<img src="img/3fd7287122ea4dcd97881b1dfd5a34ef-1716901678048-9.png" alt="在这里插入图片描述">
+<img src="img/a0de07b93151442aa8d6c3013178c0a6.png" alt="在这里插入图片描述">
+<blockquote>
+<p>owner_type 就是关联的那张表。 owner_id 就是关联的表的主键。</p>
+</blockquote>
+<h3 id="4has-many"><a class="header" href="#4has-many">4、Has Many</a></h3>
+<pre><code class="language-go">type User struct {
+	ID      int
+	Name    string
+	Address []Address `gorm:"polymorphic:Owner;"`
+}
+
+type Order struct {
+	ID      int
+	Name    string
+	Address Address `gorm:"polymorphic:Owner;"`
+}
+
+type Address struct {
+	ID        int
+	Name      string
+	OwnerID   int
+	OwnerType string
+}
+
+func main() {
+	db.AutoMigrate(User{}, Order{}, Address{})
+	db.Create(User{
+		Name: "linzy",
+		Address: []Address{
+			{Name: "翻斗花园"},
+			{Name: "杭州西湖"},
+		},
+	})
+}
+
+</code></pre>
+<img src="img/46c14c4ee4984760b1dc262ffe963741-1716901678048-13.png" alt="在这里插入图片描述">
+<h2 id="二关联标签"><a class="header" href="#二关联标签">二、关联标签</a></h2>
+<h3 id="1polymorphic-polymorphicvalue"><a class="header" href="#1polymorphic-polymorphicvalue">1、polymorphic polymorphicValue</a></h3>
+<pre><code class="language-go">type User struct {
+	ID   int
+	Name string
+	//polymorphic：通俗讲用来指定id与type的前缀
+	Address []Address `gorm:"polymorphic:Address;"`
+}
+
+type Order struct {
+	ID      int
+	Name    string
+	//polymorphicValue用来告诉关联表我是谁，默认都是表名
+	Address Address `gorm:"polymorphic:Address;polymorphicValue:master"`
+}
+
+type Address struct {
+	ID          int
+	Name        string
+	AddressID   int
+	AddressType string
+}
+
+func main() {
+	db.AutoMigrate(User{}, Order{}, Address{})
+	db.Create(User{
+		Name: "linzy",
+		Address: []Address{
+			{Name: "翻斗花园"},
+			{Name: "杭州西湖"},
+		},
+	})
+
+	db.Create(Order{
+		Name: "忘崽牛奶",
+		Address: Address{
+			Name: "火星幼儿园",
+		},
+	})
+}
+</code></pre>
+<img src="img/af6eda1f702a4e7690d4d11d51c5dc16.png" alt="在这里插入图片描述"> 
+<img src="img/891530b81c494625acbbd03e971e7547-1716901678048-17.png" alt="在这里插入图片描述"> 
+<img src="img/32b6465508944d2fa659aa2d41710355.png" alt="在这里插入图片描述">
+<h3 id="2foreignkey-references"><a class="header" href="#2foreignkey-references">2、foreignKey references</a></h3>
+<p>GORM 里默认是连接表和引用表的主键来作为做外键以及外键映射的。</p>
+<p>Has One 的例子：</p>
+<pre><code class="language-go">type CreditCard struct {
+	gorm.Model
+	Number string
+	//外键指向CreditCardNumber
+	Info   Info `gorm:"foreignKey:CreditCardNumber"`
+}
+
+type Info struct {
+	ID               uint
+	Name             string
+	Age              int
+	CreditCardNumber string
+}
+
+func main() {
+	db.AutoMigrate(CreditCard{}, Info{})
+	db.Create(CreditCard{
+		Number: "123456",
+		Info: Info{
+			Name: "linzy",
+			Age:  18,
+		},
+	})
+
+	db.Create(CreditCard{
+		Number: "456789",
+		Info: Info{
+			Name: "slyyy",
+			Age:  66,
+		},
+	})
+}
+</code></pre>
+<img src="img/b52045e09e974dec82e074ce4dd4cd12-1716901678048-21.png" alt="在这里插入图片描述">
+<img src="img/501eea72d7624710bf8efba4c6f5bcd2-1716901678048-23.png" alt="在这里插入图片描述">
+<blockquote>
+<p>注意：credit_card_number 并没有自动指向 creditcard 表里的 number 字段，他还是会默认指向引用表里的主键，所以在用<code>foreignKey</code>的时候最好类型相同或者使用<code>references</code>搭配使用。</p>
+</blockquote>
+<pre><code class="language-go">type CreditCard struct {
+	ID uint
+	//设置唯一和固定长度
+	Number string `gorm:"index:unique;size:255"`
+	Info   Info   `gorm:"foreignKey:CreditCardNumber;references:Number"`
+}
+
+type Info struct {
+	ID   uint
+	Name string
+	Age  int
+	//设置唯一和固定长度
+	CreditCardNumber string `gorm:"index:unique;size:255"`
+}
+
+func main() {
+	db.AutoMigrate(CreditCard{}, Info{})
+	db.Create(CreditCard{
+		ID:     1,
+		Number: "123456",
+		Info: Info{
+
+			Name: "linzy",
+			Age:  18,
+		},
+	})
+
+	db.Create(CreditCard{
+		ID:     2,
+		Number: "456789",
+		Info: Info{
+			Name: "slyyy",
+			Age:  66,
+		},
+	})
+}
+
+</code></pre>
+<blockquote>
+<p>注意： 某些数据库只允许在唯一索引字段上创建外键，如果在迁移时会创建外键，则需要指定 <code>index:unique</code> 标签。</p>
+</blockquote>
+<p><img src="img/9edc60ed7d5e492b95f8649d7a24f4d3-1716901678048-25.png" alt="在这里插入图片描述"> <img src="https://img-blog.csdnimg.cn/345e5edd73b24541999b82aa34a6c167.png" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>错误：
+<code>Error 1170: BLOB/TEXT column 'credit_card_number' used in key specification without a key length</code> 出现这个问题是因为你的外键或者外键映射的字段是 text 类型也就是不固定长度 string 类型，不能作为外键或外键映射，必须通过标签<code>size</code>设置固定长度。<code>Error 1215: Cannot add foreign key constraint</code> 这个错误是不能创建外键，主要原因可能是你外键映射的字段不是引用表的主键，建议标签设置为唯一 <code>index:unique</code>。</p>
+</blockquote>
+<h3 id="3many-to-many"><a class="header" href="#3many-to-many">3、Many to Many</a></h3>
+<pre><code class="language-go">type CreditCard struct {
+	ID     uint
+	Number string `gorm:"index:unique;size:255"`
+	Infos  []Info `gorm:"many2many:card_infos;foreignKey:Number;references:Name;"`
+}
+
+type Info struct {
+	ID   uint
+	Name string `gorm:"index:unique;size:255"`
+	Age  int
+}
+
+func main() {
+	db.AutoMigrate(CreditCard{}, Info{})
+	db.Create(CreditCard{
+		Number: "123456",
+		Infos: []Info{
+			{
+				ID:   1,
+				Name: "linzy",
+				Age:  18,
+			},
+		},
+	})
+
+	db.Create(CreditCard{
+		Number: "456789",
+		Infos: []Info{
+			{
+				ID:   2,
+				Name: "slyyy",
+				Age:  66,
+			},
+			{
+				ID:   3,
+				Name: "qhgwueiq",
+				Age:  1,
+			},
+		},
+	})
+}
+
+</code></pre>
+<img src="img/d5b965e97917407f88bb51376b7d6918.png" alt="在这里插入图片描述"> 
+<img src="img/f9c47da108ee46b0bca3f92e00539486-1716901678048-31.png" alt="在这里插入图片描述"> 
+<img src="img/5e2333aff2044aa6a7a791d0b7fef6f1.png" alt="在这里插入图片描述">
+<blockquote>
+<p>注意：在<code>Many to Many</code>的情况下，foreignKey 指向的是<code>引用表的外键映射字段</code>，references 指向的是<code>关联表的外键字段</code>，一定不要搞混了。</p>
+</blockquote>
+<h3 id="4joinforeignkey-joinreferences"><a class="header" href="#4joinforeignkey-joinreferences">4、joinForeignKey joinReferences</a></h3>
+<pre><code class="language-go">type CreditCard struct {
+	ID     uint
+	Number string `gorm:"index:unique;size:255"`
+	Infos  []Info `gorm:"many2many:card_infos;foreignKey:Number;joinForeignKey:card_number;references:Name;joinReferences:name"`
+}
+
+type Info struct {
+	ID   uint
+	Name string `gorm:"index:unique;size:255"`
+	Age  int
+}
+
+func main() {
+	db.AutoMigrate(CreditCard{}, Info{})
+	db.Create(CreditCard{
+		Number: "123456",
+		Infos: []Info{
+			{
+				ID:   1,
+				Name: "linzy",
+				Age:  18,
+			},
+		},
+	})
+
+	db.Create(CreditCard{
+		Number: "456789",
+		Infos: []Info{
+			{
+				ID:   2,
+				Name: "slyyy",
+				Age:  66,
+			},
+			{
+				ID:   3,
+				Name: "qhgwueiq",
+				Age:  1,
+			},
+		},
+	})
+}
+
+
+</code></pre>
+<img src="img/4f2821bed156416d8d56fe884fec9758-1716901678048-35.png" alt="在这里插入图片描述">
+<h2 id="三事务"><a class="header" href="#三事务">三、事务</a></h2>
+<h3 id="1事务概述"><a class="header" href="#1事务概述">1、事务概述</a></h3>
+<p>数据库事务( transaction)是访问并可能操作各种数据项的一个<code>数据库操作序列</code>，这些操作要么全部执行，要么全部不执行，是一个不可分割的工作单位。 事务由事务开始与事务结束之间执行的全部数据库操作组成。</p>
+<p>数据库事务必须具备的四个特性：</p>
+<h3 id="2事务操作"><a class="header" href="#2事务操作">2、事务操作</a></h3>
+<p>要在事务中执行一系列操作，一般流程如下：</p>
+<pre><code class="language-go">type User struct {
+	gorm.Model
+	Name string
+}
+
+func main() {
+	db.AutoMigrate(User{})
+	db.Transaction(func(tx *gorm.DB) error {
+		// 在事务中执行一些 db 操作（从这里开始，应该使用 'tx' 而不是 'db'）
+		if err := tx.Create(User{Name: "Giraffe"}).Error; err != nil {
+			// 返回任何错误都会回滚事务
+			return err
+		}
+
+		if err := tx.Create(User{Name: "Lion"}).Error; err != nil {
+			return err
+		}
+
+		// 返回 nil 提交事务
+		return nil
+	})
+}
+</code></pre>
+<img src="img/9c0bdf35a2794bcbb88ef85c9ab5e154-1716901678049-37.png" alt="在这里插入图片描述">
+<h4 id="1回滚"><a class="header" href="#1回滚">1）回滚</a></h4>
+<blockquote>
+<p>注意：返回任何错误都会回滚事务。回滚则事务内的操作一律不执行。</p>
+</blockquote>
+<pre><code class="language-go">func main() {
+	db.AutoMigrate(User{})
+	db.Transaction(func(tx *gorm.DB) error {
+		// 在事务中执行一些 db 操作（从这里开始，应该使用 'tx' 而不是 'db'）
+		if err := tx.Create(User{Name: "linzy"}).Error; err != nil {
+			// 返回任何错误都会回滚事务
+			return err
+		}
+
+		if err := tx.Create(User{Name: "slyyy"}).Error; err != nil {
+			return err
+		}
+
+		if true {
+			return errors.New("回滚")
+		}
+
+		// 返回 nil 提交事务
+		return nil
+	})
+}
+</code></pre>
+<img src="img/c28e84c61dbf44b19d19864f5859e234-1716901678049-39.png" alt="在这里插入图片描述">
+<h4 id="2嵌套事务"><a class="header" href="#2嵌套事务">2）嵌套事务</a></h4>
+<p>嵌套事务的作用在于较大的事务中，你只想回滚一部分操作，例如你去银行转账，已经通过银行卡号和密码登录了，转账的过程是你的银行账户扣去多少钱，同时别人的银行账户加上多少钱，如果中途发生错误，需要回滚，应该回滚到你账号登录后的状态，而不是直接回滚到你账号登录前。</p>
+<pre><code class="language-go">
+type User struct {
+	gorm.Model
+	Name   string
+	Number int
+}
+
+func main() {
+	db.AutoMigrate(User{})
+	db.Transaction(func(tx *gorm.DB) error {
+		tx.Create(User{
+			Name:   "linzy",
+			Number: 100,
+		})
+		tx.Create(User{
+			Name:   "slyyy",
+			Number: 100,
+		})
+		fmt.Println("登陆后")
+		tx.Transaction(func(tx2 *gorm.DB) error {
+			// 在事务中执行一些 db 操作（从这里开始，应该使用 'tx' 而不是 'db')
+			if err := tx2.Model(User{}).Where("name = ?", "linzy").Update("number", 80).Error; err != nil {
+				// 返回任何错误都会回滚事务
+				return err
+			}
+
+			if err := tx2.Model(User{}).Where("name = ?", "slyyy").Update("number", 120).Error; err != nil {
+				return err
+			}
+			return nil
+		})
+		fmt.Println("转账结束")
+		// 返回 nil 提交事务
+		return nil
+	})
+}
+</code></pre>
+<img src="img/23b30a9f0f254197a524c8bb5d788998-1716901678049-43.png" alt="在这里插入图片描述">
+<p><img src="img/9a49f4a4baaf4b41a3f5e61c980b8824-1716901678049-41.png" alt="在这里插入图片描述"> 正常的过程应该是这样，如果说嵌套事务发生回滚操作之后的情况呢？</p>
+<pre><code class="language-go">func main() {
+	db.AutoMigrate(User{})
+	db.Transaction(func(tx *gorm.DB) error {
+		tx.Create(User{
+			Name:   "linzy",
+			Number: 100,
+		})
+		tx.Create(User{
+			Name:   "slyyy",
+			Number: 100,
+		})
+		fmt.Println("登陆后")
+		tx.Transaction(func(tx2 *gorm.DB) error {
+			// 在事务中执行一些 db 操作（从这里开始，应该使用 'tx' 而不是 'db')
+			if err := tx2.Model(User{}).Where("name = ?", "linzy").Update("number", 80).Error; err != nil {
+				// 返回任何错误都会回滚事务
+				return err
+			}
+
+			if true {
+				fmt.Println("转账失败，对面是骗子不能转！！")
+				return errors.New("转账失败")
+			}
+
+			if err := tx2.Model(User{}).Where("name = ?", "slyyy").Update("number", 120).Error; err != nil {
+				return err
+			}
+			return nil
+		})
+		fmt.Println("转账结束")
+		// 返回 nil 提交事务
+		return nil
+	})
+}
+
+
+</code></pre>
+<img src="img/bbcfbc6e5c3540a0ae554a9e0347fa3a-1716901678049-45.png" alt="在这里插入图片描述"> 
+<img src="img/a403cb86338044609bb79bfa7c708f8f.png" alt="在这里插入图片描述">
+<h3 id="3手动事务"><a class="header" href="#3手动事务">3、手动事务</a></h3>
+<p>Gorm 支持直接调用事务控制方法（commit、rollback），例如：</p>
+<div class="table-wrapper"><table><thead><tr><th>事务方法</th><th>说明</th></tr></thead><tbody>
+<tr><td>tx := db.Begin()</td><td>开始事务</td></tr>
+<tr><td>tx.（db 操作）</td><td>在事务中执行一些 db 操作</td></tr>
+<tr><td>tx.Rollback()</td><td>遇到错误时回滚事务</td></tr>
+<tr><td>tx.SavePoint()</td><td>设置保存点标记</td></tr>
+<tr><td>tx.RollbackTo()</td><td>回滚到保存点标记</td></tr>
+<tr><td>tx.Commit()</td><td>提交事务</td></tr>
+</tbody></table>
+</div>
+<pre><code class="language-go">type User struct {
+	gorm.Model
+	Name   string
+	Number int
+}
+
+func main() {
+	db.AutoMigrate(User{})
+	// 开始事务
+	tx := db.Begin()
+
+	// 在事务中执行一些 db 操作（从这里开始，您应该使用 'tx' 而不是 'db'）
+	tx.Create(User{
+		Name:   "linzy",
+		Number: 100,
+	})
+	tx.Create(User{
+		Name:   "slyyy",
+		Number: 100,
+	})
+	fmt.Println("登陆后")
+	//设置回滚标记
+	tx.SavePoint("登录了")
+	flag := true
+	{
+		if err := tx.Model(User{}).Where("name = ?", "linzy").Update("number", 80).Error; err != nil {
+			flag = true
+		}
+
+		if err := tx.Model(User{}).Where("name = ?", "slyyy").Update("number", 120).Error; err != nil {
+			flag = true
+		}
+
+		//出现问题了得写在一系列事务之后进行回滚
+		if flag {
+			fmt.Println("转账失败，对面是骗子不能转！！")
+			//回滚到指定标记
+			tx.RollbackTo("登录了")
+		}
+	}
+	// 遇到错误时回滚事务
+	fmt.Println("转账结束")
+	// 否则，提交事务
+	tx.Commit()
+}
+
+</code></pre>
+<img src="img/5cf8bdf745d9477daebb4585335b4526-1716901678049-49.png" alt="在这里插入图片描述">
+<h4 id="官方示例"><a class="header" href="#官方示例">官方示例：</a></h4>
+<pre><code class="language-go">func CreateAnimals(db *gorm.DB) error {
+  // 再唠叨一下，事务一旦开始，你就应该使用 tx 处理数据
+  tx := db.Begin()
+  //延迟函数一定要写上，因为出现panic错误时事务可能没办法回滚，需要手动再回滚
+  defer func() {
+    if r := recover(); r != nil {
+      tx.Rollback()
+    }
+  }()
+
+  if err := tx.Error; err != nil {
+    return err
+  }
+
+  if err := tx.Create(Animal{Name: "Giraffe"}).Error; err != nil {
+     tx.Rollback()
+     return err
+  }
+
+  if err := tx.Create(Animal{Name: "Lion"}).Error; err != nil {
+     tx.Rollback()
+     return err
+  }
+
+  return tx.Commit().Error
+}
+
+</code></pre>
+<h3 id="4禁用默认事务"><a class="header" href="#4禁用默认事务">4、禁用默认事务</a></h3>
+<p>为了确保数据一致性，GORM 会在事务里执行写入操作（创建、更新、删除）。如果没有这方面的要求，您可以在初始化时禁用它，这将获得大约 30%+ 性能提升。</p>
+<pre><code class="language-go">// 全局禁用
+db, err := gorm.Open(sqlite.Open("gorm.db"), gorm.Config{
+  SkipDefaultTransaction: true,
+})
+
+// 持续会话模式
+tx := db.Session(Session{SkipDefaultTransaction: true})
+tx.First(user, 1)
+tx.Find(users)
+tx.Model(user).Update("Age", 18)
+
+</code></pre>
+<h2 id="四小结"><a class="header" href="#四小结">四、小结</a></h2>
+<p>本章拓展了 GORM 对数据库的更多支持，关联标签与事务是很重要的内容。</p>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">标签</th><th>描述</th></tr></thead><tbody>
+<tr><td style="text-align: left">foreignKey</td><td>指定当前模型的列作为连接表的外键</td></tr>
+<tr><td style="text-align: left">references</td><td>指定引用表的列名，其将被映射为连接表外键</td></tr>
+<tr><td style="text-align: left">polymorphic</td><td>指定多态类型，比如模型名</td></tr>
+<tr><td style="text-align: left">polymorphicValue</td><td>指定多态值、默认表名</td></tr>
+<tr><td style="text-align: left">many2many</td><td>指定连接表表名</td></tr>
+<tr><td style="text-align: left">joinForeignKey</td><td>指定连接表的外键列名，其将被映射到当前表</td></tr>
+<tr><td style="text-align: left">joinReferences</td><td>指定连接表的外键列名，其将被映射到引用表</td></tr>
+</tbody></table>
+</div>
+<p>手动事务适用于小事务操作，出错了直接全部回滚会更好，虽然提供了 <code>SavePoint</code>、<code>Rollbackto</code>方法，来提供保存点以及回滚至保存点功能，但是有一些同步操作操作很不方便。 GORM 自带事务适用大事务操作，可以使用嵌套事务。</p>
+<blockquote>
+<p>若有写的错误的或者需要改进的地方，希望能直接指出，再次感谢 GVA 淼哥的教程！</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Go/gorm/gorm的关联.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Go/gorm/增删改查.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Go/gorm/gorm的关联.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Go/gorm/增删改查.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

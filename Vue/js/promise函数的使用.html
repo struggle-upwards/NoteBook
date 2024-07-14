@@ -1,0 +1,1683 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>promise 函数的使用 - 浩瀚星河</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../../favicon.svg">
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../index.html"><strong aria-hidden="true">1.</strong> 首页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../操作系统/index.html"><strong aria-hidden="true">2.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../操作系统/操作系统的定义.html"><strong aria-hidden="true">2.1.</strong> 操作系统的定义</a></li><li class="chapter-item expanded "><a href="../../操作系统/进程.html"><strong aria-hidden="true">2.2.</strong> 进程</a></li><li class="chapter-item expanded "><a href="../../操作系统/操作系统总结.html"><strong aria-hidden="true">2.3.</strong> 操作系统总结</a></li><li class="chapter-item expanded "><a href="../../操作系统/Linux指令.html"><strong aria-hidden="true">2.4.</strong> Linux 指令</a></li></ol></li><li class="chapter-item expanded "><a href="../../Git/index.html"><strong aria-hidden="true">3.</strong> Git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Git/git创建补丁.html"><strong aria-hidden="true">3.1.</strong> git 创建补丁</a></li><li class="chapter-item expanded "><a href="../../Git/git命令.html"><strong aria-hidden="true">3.2.</strong> git 命令</a></li><li class="chapter-item expanded "><a href="../../Git/git在Jetbrains中的使用.html"><strong aria-hidden="true">3.3.</strong> git 在 Jetbrains 中的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Docker/index.html"><strong aria-hidden="true">4.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Docker/GVC配置.html"><strong aria-hidden="true">4.1.</strong> GVC配置</a></li><li class="chapter-item expanded "><a href="../../Docker/blog-readme.html"><strong aria-hidden="true">4.2.</strong> Blog Readme</a></li><li class="chapter-item expanded "><a href="../../Docker/docker-compose命令.html"><strong aria-hidden="true">4.3.</strong> docker-compose 命令</a></li><li class="chapter-item expanded "><a href="../../Docker/docker命令.html"><strong aria-hidden="true">4.4.</strong> docker 命令</a></li><li class="chapter-item expanded "><a href="../../Docker/docker部署gin,vue博客.html"><strong aria-hidden="true">4.5.</strong> docker 部署 gin,vue 博客</a></li><li class="chapter-item expanded "><a href="../../Docker/docker部署ollama.html"><strong aria-hidden="true">4.6.</strong> docker 部署 ollama</a></li><li class="chapter-item expanded "><a href="../../Docker/gin-vue-community.html"><strong aria-hidden="true">4.7.</strong> Gin Vue Community</a></li><li class="chapter-item expanded "><a href="../../Docker/数据库的设计.html"><strong aria-hidden="true">4.8.</strong> 数据库的设计</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../Typescript/index.html"><strong aria-hidden="true">5.</strong> Typescript</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/index.html"><strong aria-hidden="true">5.1.</strong> 一.变量的类型</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中哪些判断条件是true,哪些是false.html"><strong aria-hidden="true">5.1.1.</strong> ts 中哪些判断条件是 true,哪些是 false</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的基本类型.html"><strong aria-hidden="true">5.1.2.</strong> ts 中的基本类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中变量的任意类型.html"><strong aria-hidden="true">5.1.3.</strong> ts 中变量的任意类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的Object和object.html"><strong aria-hidden="true">5.1.4.</strong> ts 中的 Object 和 object</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的接口和对象类型.html"><strong aria-hidden="true">5.1.5.</strong> ts 中的接口和对象类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的数组类型.html"><strong aria-hidden="true">5.1.6.</strong> ts 中的数组类型</a></li><li class="chapter-item expanded "><a href="../../Typescript/一.变量的类型/ts中的函数类型.html"><strong aria-hidden="true">5.1.7.</strong> ts 中的函数类型</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../uniapp/index.html"><strong aria-hidden="true">6.</strong> Uniapp</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../uniapp/uniapp中pages.json的配置.html"><strong aria-hidden="true">6.1.</strong> uniapp 中 pages.json 的配置</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp命令行创建项目.html"><strong aria-hidden="true">6.2.</strong> uniapp 命令行创建项目</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp拦截器.html"><strong aria-hidden="true">6.3.</strong> uniapp 拦截器</a></li><li class="chapter-item expanded "><a href="../../uniapp/uniapp轮播图.html"><strong aria-hidden="true">6.4.</strong> uniapp 轮播图</a></li><li class="chapter-item expanded "><a href="../../uniapp/vscode中的uniapp配置.html"><strong aria-hidden="true">6.5.</strong> vscode 中的 uniapp 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/index.html"><strong aria-hidden="true">7.</strong> Vue</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/css3/index.html"><strong aria-hidden="true">7.1.</strong> Css3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/css3/css3中的sticky定位.html"><strong aria-hidden="true">7.1.1.</strong> css3 中的 sticky 定位</a></li><li class="chapter-item expanded "><a href="../../Vue/css3/css3中的伪类.html"><strong aria-hidden="true">7.1.2.</strong> css3 中的伪类</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/index.html"><strong aria-hidden="true">7.2.</strong> ElementPlus</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus导入自定义主题色.html"><strong aria-hidden="true">7.2.1.</strong> element-plus 导入自定义主题色</a></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus表单校验.html"><strong aria-hidden="true">7.2.2.</strong> element-plus 表单校验</a></li><li class="chapter-item expanded "><a href="../../Vue/element-plus/element-plus去除菜单下划线.html"><strong aria-hidden="true">7.2.3.</strong> element-plus 去除菜单下划线</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/error/index.html"><strong aria-hidden="true">7.3.</strong> Error</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/error/无法找到.vue.html"><strong aria-hidden="true">7.3.1.</strong> 无法找到.vue</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/js/index.html"><strong aria-hidden="true">7.4.</strong> Js</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/js/async和await的使用.html"><strong aria-hidden="true">7.4.1.</strong> async 和 await 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/js/es6模板字符串.html"><strong aria-hidden="true">7.4.2.</strong> es6 模板字符串</a></li><li class="chapter-item expanded "><a href="../../Vue/js/export和export_default的区别.html"><strong aria-hidden="true">7.4.3.</strong> export 和 export_default 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/js/import的使用.html"><strong aria-hidden="true">7.4.4.</strong> import 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/js/js函数注释.html"><strong aria-hidden="true">7.4.5.</strong> js 函数注释</a></li><li class="chapter-item expanded "><a href="../../Vue/js/js的可选链运算符.html"><strong aria-hidden="true">7.4.6.</strong> js 的可选链运算符</a></li><li class="chapter-item expanded "><a href="../../Vue/js/promise函数的使用.html" class="active"><strong aria-hidden="true">7.4.7.</strong> promise 函数的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/pinia/index.html"><strong aria-hidden="true">7.5.</strong> Pinia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/pinia/pinia的信息存入LocalStorage.html"><strong aria-hidden="true">7.5.1.</strong> pinia 的信息存入 LocalStorage</a></li><li class="chapter-item expanded "><a href="../../Vue/pinia/vue3中的pinia的使用.html"><strong aria-hidden="true">7.5.2.</strong> vue3 中的 pinia 的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/sass/index.html"><strong aria-hidden="true">7.6.</strong> Sass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/sass/sass中的%选择器.html"><strong aria-hidden="true">7.6.1.</strong> sass 中的%选择器</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/index.html"><strong aria-hidden="true">7.7.</strong> VueRouter</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中keep-alive的使用.html"><strong aria-hidden="true">7.7.1.</strong> vue3 中 keep-alive 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中滚动行为scrollBehavior.html"><strong aria-hidden="true">7.7.2.</strong> vue3 中滚动行为 scrollBehavior</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中的router-view.html"><strong aria-hidden="true">7.7.3.</strong> vue3 中的 router-view</a></li><li class="chapter-item expanded "><a href="../../Vue/vue-router/vue3中配置@别名.html"><strong aria-hidden="true">7.7.4.</strong> vue3 中配置@别名</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue2/index.html"><strong aria-hidden="true">7.8.</strong> Vue2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2的sass-loader载入问题.html"><strong aria-hidden="true">7.8.1.</strong> vue2 的 sass-loader 载入问题</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2自定义登录组件.html"><strong aria-hidden="true">7.8.2.</strong> vue2 自定义登录组件</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2路由只能跳转一次问题.html"><strong aria-hidden="true">7.8.3.</strong> vue2 路由只能跳转一次问题</a></li><li class="chapter-item expanded "><a href="../../Vue/vue2/vue2配置.html"><strong aria-hidden="true">7.8.4.</strong> vue2 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vue3/index.html"><strong aria-hidden="true">7.9.</strong> Vue3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中hooks和pinia的区别.html"><strong aria-hidden="true">7.9.1.</strong> vue3 中 hooks 和 pinia 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中sass的使用.html"><strong aria-hidden="true">7.9.2.</strong> vue3 中 sass 的使用</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中slot和props的区别.html"><strong aria-hidden="true">7.9.3.</strong> vue3 中 slot 和 props 的区别</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中使用defineProps和defineEmits.html"><strong aria-hidden="true">7.9.4.</strong> vue3 中使用 defineProps 和 defineEmits</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的computed和watch方法.html"><strong aria-hidden="true">7.9.5.</strong> vue3 中的 computed 和 watch 方法</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的npm安装包.html"><strong aria-hidden="true">7.9.6.</strong> vue3 中的 npm 安装包</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的provide和inject.html"><strong aria-hidden="true">7.9.7.</strong> vue3 中的 provide 和 inject</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3中的scoped和v-deep.html"><strong aria-hidden="true">7.9.8.</strong> vue3 中的 scoped 和 v-deep</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3使用props传值.html"><strong aria-hidden="true">7.9.9.</strong> vue3 使用 props 传值</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3使用slot传值.html"><strong aria-hidden="true">7.9.10.</strong> vue3 使用 slot 传值</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/vue3配置axios.html"><strong aria-hidden="true">7.9.11.</strong> vue3 配置 axios</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/单文件和多文件.html"><strong aria-hidden="true">7.9.12.</strong> 单文件和多文件</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/响应式和声明式.html"><strong aria-hidden="true">7.9.13.</strong> 响应式和声明式</a></li><li class="chapter-item expanded "><a href="../../Vue/vue3/选项式和组合式.html"><strong aria-hidden="true">7.9.14.</strong> 选项式和组合式</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vueplugins/index.html"><strong aria-hidden="true">7.10.</strong> Vueplugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vueplugins/图片放大镜效果.html"><strong aria-hidden="true">7.10.1.</strong> 图片放大镜效果</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/vueuse/index.html"><strong aria-hidden="true">7.11.</strong> Vueuse</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/vueuse/useIntersectionObserver.html"><strong aria-hidden="true">7.11.1.</strong> Use Intersection Observer</a></li><li class="chapter-item expanded "><a href="../../Vue/vueuse/useScroll.html"><strong aria-hidden="true">7.11.2.</strong> Use Scroll</a></li></ol></li><li class="chapter-item expanded "><a href="../../Vue/相关配置/index.html"><strong aria-hidden="true">7.12.</strong> 相关配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Vue/相关配置/prettier格式化插件.html"><strong aria-hidden="true">7.12.1.</strong> prettier 格式化插件</a></li><li class="chapter-item expanded "><a href="../../Vue/相关配置/设置路径src目录别名为@.html"><strong aria-hidden="true">7.12.2.</strong> 设置路径src目录别名为@</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../../Django/index.html"><strong aria-hidden="true">8.</strong> Django</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Django/Django.html"><strong aria-hidden="true">8.1.</strong> Django 的 bug</a></li><li class="chapter-item expanded "><a href="../../Django/Drf用户认证.html"><strong aria-hidden="true">8.2.</strong> Drf 用户认证</a></li><li class="chapter-item expanded "><a href="../../Django/Token详解.html"><strong aria-hidden="true">8.3.</strong> Token 详解</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/index.html"><strong aria-hidden="true">9.</strong> Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/bug/index.html"><strong aria-hidden="true">9.1.</strong> Bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/bug/gorm无法寻址.html"><strong aria-hidden="true">9.1.1.</strong> gorm 无法寻址</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/Gin/index.html"><strong aria-hidden="true">9.2.</strong> Gin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/Gin/gin实现热加载.html"><strong aria-hidden="true">9.2.1.</strong> gin 实现热加载</a></li><li class="chapter-item expanded "><a href="../../Go/Gin/gin获取路径参数.html"><strong aria-hidden="true">9.2.2.</strong> gin 获取路径参数</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/Gorm/index.html"><strong aria-hidden="true">9.3.</strong> Gorm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/gorm/gorm一对一.html"><strong aria-hidden="true">9.3.1.</strong> gorm 一对一</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm一对多.html"><strong aria-hidden="true">9.3.2.</strong> gorm 一对多</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm多态关联.html"><strong aria-hidden="true">9.3.3.</strong> gorm 多态关联</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的Many2Many.html"><strong aria-hidden="true">9.3.4.</strong> gorm 的 Many2Many</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的关联.html"><strong aria-hidden="true">9.3.5.</strong> gorm 的关联</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/gorm的多态关联和事务.html"><strong aria-hidden="true">9.3.6.</strong> gorm 的多态关联和事务</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/增删改查.html"><strong aria-hidden="true">9.3.7.</strong> 增删改查</a></li><li class="chapter-item expanded "><a href="../../Go/gorm/连接mysql.html"><strong aria-hidden="true">9.3.8.</strong> 连接 mysql</a></li></ol></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/index.html"><strong aria-hidden="true">9.4.</strong> go 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Go/go基础知识/go_get和go_install区别.html"><strong aria-hidden="true">9.4.1.</strong> go_get 和 go_install 区别</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go中结构体互转.html"><strong aria-hidden="true">9.4.2.</strong> go 中结构体互转</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go变量声明.html"><strong aria-hidden="true">9.4.3.</strong> go 变量声明</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go文件操作.html"><strong aria-hidden="true">9.4.4.</strong> go 文件操作</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go环境变量及配置.html"><strong aria-hidden="true">9.4.5.</strong> go 环境变量及配置</a></li><li class="chapter-item expanded "><a href="../../Go/go基础知识/go的printf占位符.html"><strong aria-hidden="true">9.4.6.</strong> go 的 printf 占位符</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../Mysql/index.html"><strong aria-hidden="true">10.</strong> Mysql</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../Mysql/数据库画er图.html"><strong aria-hidden="true">10.1.</strong> 数据库画 er 图</a></li><li class="chapter-item expanded "><a href="../../Mysql/第三章作业.html"><strong aria-hidden="true">10.2.</strong> 第三章作业</a></li></ol></li><li class="chapter-item expanded "><a href="../../openguass/index.html"><strong aria-hidden="true">11.</strong> Openguass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../openguass/postgresql增删改查.html"><strong aria-hidden="true">11.1.</strong> postgresql 增删改查</a></li><li class="chapter-item expanded "><a href="../../openguass/postgresql文档.html"><strong aria-hidden="true">11.2.</strong> postgresql 文档</a></li><li class="chapter-item expanded "><a href="../../openguass/创建openguass容器.html"><strong aria-hidden="true">11.3.</strong> 创建 openguass 容器</a></li><li class="chapter-item expanded "><a href="../../openguass/数据库错题.html"><strong aria-hidden="true">11.4.</strong> 数据库错题</a></li><li class="chapter-item expanded "><a href="../../openguass/第一次实验.html"><strong aria-hidden="true">11.5.</strong> 第一次实验</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">浩瀚星河</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="javascript高级深入浅出promise-详解es6"><a class="header" href="#javascript高级深入浅出promise-详解es6">JavaScript高级深入浅出：Promise 详解(ES6)</a></h1>
+<h1 id="介绍"><a class="header" href="#介绍">介绍</a></h1>
+<p>本文是 JavaScript 高级深入浅出的第 <code>15</code> 篇，本文将会对于 Promise 详解以及手写 Promise 的功能以及 API</p>
+<h1 id="正文"><a class="header" href="#正文">正文</a></h1>
+<h2 id="1-异步任务的处理"><a class="header" href="#1-异步任务的处理">1. 异步任务的处理</a></h2>
+<p>在 ES6 出来之后，有很多有关于 Promise 的讲解，文件也有很多经典的书籍讲解 Promise</p>
+<p>虽然等你学会 Promise 之后，会觉得 Promise 不过如此，但是第一次接触后 Promsie 还是很不好理解</p>
+<p>那么我们就以一个实际的例子作为切入口</p>
+<ul>
+<li>调用一个函数，这个函数中返回网络请求（以定时器模拟）</li>
+<li>发送网络请求成功，就告知调用者成功，并返回数据</li>
+<li>发送网络请求失败，就告知调用者失败，并返回失败信息</li>
+</ul>
+<pre><code class="language-js">function request(cb) {
+    // 模拟网络请求
+    let flag = Math.random() &lt;= 0.5 ? true : false
+    setTimeout(() =&gt; {
+      cb(flag, flag ? '成功的数据' : '失败的信息')
+    }, 1000)
+  }
+  
+  console.log('发起请求')
+  
+  request((status, msg) =&gt; {
+    console.log(status, msg)
+  })
+  
+  request((s1, m1) =&gt; {
+      request((s2, m2) =&gt; {
+          request((s3, m3) =&gt; {
+              // 出现了回调地狱
+          })
+      })
+  })
+</code></pre>
+<p>使用这种回调函数存在的弊端：</p>
+<ul>
+<li>如果是自己封装的请求方法，必须要设计好</li>
+<li>如果使用他人库，必须要通过查看文档或源码才能直到如何使用这个函数</li>
+<li>极容易出现回调地狱</li>
+</ul>
+<p>所以，需要一种异步操作的规范，而 Promise 生来就是为了解决异步操作的问题</p>
+<h2 id="2-promise"><a class="header" href="#2-promise">2. Promise</a></h2>
+<h3 id="21-什么是-promise"><a class="header" href="#21-什么是-promise">2.1 什么是 Promise</a></h3>
+<p><code>Promise</code>是一个类，可以翻译为承诺、期约</p>
+<p>当通过<code>new</code>创建<code>Promise</code>实例时，需要传入一个回调函数，我们称之为<code>executor</code></p>
+<ul>
+<li>这个回调函数会被立刻执行，并传入两个回调参数<code>resolve</code>、<code>reject</code></li>
+<li>当调用<code>resolve</code>回调函数时，会执行 Promise 对象的<code>then</code>方法传入的回调</li>
+<li>当调用<code>reject</code>回调函数时，会执行 Promise 对象的<code>catch</code>方法传入的回调</li>
+</ul>
+<p><code>Promise</code>是一个状态机，分为 3 种状态：</p>
+<ul>
+<li><code>pending</code>：待定状态，执行了 executor 后，处于该状态</li>
+<li><code>fulfilled</code>：兑现状态，调用<code>resolve()</code>后，Promise 的状态更改为 fullfilled，且无法再次更改</li>
+<li><code>rejected</code>：拒绝状态，调用<code>reject()</code>后，Promise 的状态更改为 rejected，且无法再次更改</li>
+</ul>
+<pre><code class="language-js">function request() {
+  const flag = Math.random() &lt;= 0.5 ? true : false
+  return new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      if (flag) {
+        resolve('成功的消息')
+        return
+      }
+      reject('失败的消息')
+    }, 2000)
+  })
+}
+
+console.log('请求开始')
+request()
+  .then(msg =&gt; console.log(msg), err =&gt; console.log(err))
+</code></pre>
+<h3 id="22-resolve-的参数"><a class="header" href="#22-resolve-的参数">2.2 resolve 的参数</a></h3>
+<p>resolve 传入的参数情况：</p>
+<ul>
+<li>如果传入的普通的值或对象，那么就会被传递到 then 的参数中</li>
+<li>如果传入的是一个 Promise，那么当前的 Promise 的状态将会由传入的 Promise 来决定</li>
+</ul>
+<pre><code class="language-js">const newPromise = new Promise((resolve, reject) =&gt; {
+  resolve('success')
+})
+
+new Promise((resolve, reject) =&gt; {
+  // 当前 Promise 的状态由传入的 Promise 去决定
+  resolve(newPromise)
+})
+  .then(res =&gt; {
+    console.log('res', res)
+  })
+  .catch(err =&gt; {
+    console.log('err', err)
+  })
+</code></pre>
+<ul>
+<li>如果传入的是一个对象，且该对象实现了 then 方法(thenable)，也会执行该 then 方法，并且由该 then 方法决定后续的状态</li>
+</ul>
+<pre><code class="language-js">new Promise((resolve, reject) =&gt; {
+  // 如果 resolve 传入的是对象，且该对象实现了 then 方法
+  // 则该 Promise 的状态由 then 方法决定
+  resolve({
+    then(resolve, reject) {
+      reject('error')
+    },
+  })
+})
+  .then(res =&gt; {
+    console.log('res', res)
+  })
+  .catch(err =&gt; {
+    console.log('err', err)
+  })
+</code></pre>
+<h3 id="23-promise-的实例方法"><a class="header" href="#23-promise-的实例方法">2.3 Promise 的实例方法</a></h3>
+<h4 id="1-then-方法"><a class="header" href="#1-then-方法">1. then 方法</a></h4>
+<p>通过<code>then</code>方法可以对 Promise 中的<code>resolve</code>进行处理。<code>then</code>方法的返回值是一个 Promise 实例</p>
+<pre><code class="language-js">new Promise(resolve =&gt; {
+  resolve('你好')
+}).then(res =&gt; console.log(res)) // 会打印你好
+</code></pre>
+<h5 id="多次调用-then-方法"><a class="header" href="#多次调用-then-方法">多次调用 then 方法</a></h5>
+<p>同一个 Promise 实例可以调用多个<code>then</code>方法，当 Promise 中<code>resolve</code>被回调时，所有 then 方法传入的回调函数都会被调用</p>
+<pre><code class="language-js">const promise = new Promise(resolve =&gt; {
+  resolve('你好')
+})
+
+// 同时调用
+promise.then(res =&gt; console.log(res))
+promise.then(res =&gt; console.log(res))
+promise.then(res =&gt; console.log(res))
+</code></pre>
+<h5 id="then-方法传入的回调函数可以有返回值"><a class="header" href="#then-方法传入的回调函数可以有返回值">then 方法传入的回调函数可以有返回值</a></h5>
+<p>如果返回的是普通值，那么这个普通值将作为一个新的 Promise 的<code>resolve</code>的值</p>
+<pre><code class="language-js">const promise = new Promise(resolve =&gt; {
+  resolve('你好')
+})
+
+promise.then(() =&gt; 'then').then(res =&gt; console.log(res)) // 打印 then
+// promise.then(() =&gt; 'then') 相当于
+promise.then(() =&gt; {
+  return new Promise(resolve =&gt; {
+    resolve('then')
+  })
+})
+</code></pre>
+<p>如果返回的是 Promise，那么就可以再次调用<code>then</code>方法</p>
+<pre><code class="language-js">const promise = new Promise(resolve =&gt; {
+  resolve('你好')
+})
+promise
+  .then(() =&gt; {
+    return new Promise(resolve =&gt; {
+      setTimeout(() =&gt; {
+        resolve('success')
+      }, 2000)
+    })
+  })
+  .then(msg =&gt; {
+    // 2 秒后打印 success
+    console.log(msg)
+  })
+</code></pre>
+<p>如果返回的是一个对象，并且该对象实现了 thenable，该 then 函数有两个参数<code>resolve</code>、<code>reject</code>，则 resolve 的将会传递给下一个 Promise。</p>
+<pre><code class="language-js">const promise = new Promise(resolve =&gt; {
+  resolve('你好')
+})
+promise
+  .then(() =&gt; {
+    return {
+      then(resolve) {
+        return resolve('success')
+      },
+    }
+  })
+  .then(msg =&gt; {
+    // 打印 success
+    console.log(msg)
+  })
+</code></pre>
+<h4 id="2-catch-方法"><a class="header" href="#2-catch-方法">2. catch 方法</a></h4>
+<p>除了<code>then</code>方法的第二个参数来捕获<code>reject</code>错误之外，还可以通过<code>catch</code>方法，catch 返回一个 Promise</p>
+<pre><code class="language-js">const promise = new Promise((resolve, reject) =&gt; {
+  reject('error')
+})
+
+promise.then(undefined, err =&gt; {
+  // 打印 error
+  console.log(err)
+})
+
+// 但是这种写法不太符合`promise/a+`规范
+promise.catch(err =&gt; {
+  // 打印 error
+  console.log(err)
+})
+
+// 下面是符合`promise/a+`规范的写法
+promise
+  .then(() =&gt; {})
+  .catch(err =&gt; {
+    console.log(err)
+  })
+// 已知 then 方法也可以返回一个 promise，因此在 then 后面追加 catch，以此来捕获 rejected 的情况，更加具有语义化
+</code></pre>
+<p><code>catch</code>方法也是可以多次调用的，只要 Promise 实例的状态为 rejected，那么就会调用<code>catch</code>方法</p>
+<pre><code class="language-js">const promise = new Promise((resolve, reject) =&gt; {
+  reject('error')
+})
+
+// 这两个 catch 都会调用
+promise.catch(err =&gt; {
+  console.log(err)
+})
+promise.catch(err =&gt; {
+  console.log(err)
+})
+</code></pre>
+<h5 id="catch-方法的返回值"><a class="header" href="#catch-方法的返回值">catch 方法的返回值</a></h5>
+<p>catch 方法也会返回一个<code>Promise</code>实例，返回值的情况：</p>
+<ul>
+<li>普通值，将作为<code>resolve</code>的参数</li>
+</ul>
+<h4 id="3-finally-方法"><a class="header" href="#3-finally-方法">3. finally 方法</a></h4>
+<p>finally 是 ES9(ES2018) 新增的一个特性，无论一个<code>Promise</code>实例是<code>fulfilled</code>或<code>rejected</code>，<code>finally</code>都会执行。</p>
+<p>finally 不接收参数。</p>
+<pre><code class="language-js">const promise = new Promise((resolve, reject) =&gt; {
+  reject('error')
+})
+
+promise
+  .then(res =&gt; {
+    console.log('res:', res)
+  })
+  .catch(err =&gt; {
+    console.log(('err', err))
+  })
+  .finally(() =&gt; {
+    console.log('finally code execute')
+  })
+</code></pre>
+<h3 id="24-promise-的类方法"><a class="header" href="#24-promise-的类方法">2.4 Promise 的类方法</a></h3>
+<h4 id="1-resolve-方法"><a class="header" href="#1-resolve-方法">1. resolve 方法</a></h4>
+<p>如果我们想要将一个现成的数据转换为一个 Promise 实例，那么你可以这么做：</p>
+<pre><code class="language-js">const foo = {
+  name: 'alex',
+}
+
+function bar(obj) {
+  return new Promise(resolve =&gt; {
+    resolve(obj)
+  })
+}
+
+bar(foo).then(res =&gt; {
+  console.log(res)
+})
+</code></pre>
+<p>还可以直接类方法<code>resolve()</code>，使用<code>Promise.resolve()</code>相当于<code>new Promise(resolve =&gt; { resolve() })</code></p>
+<pre><code class="language-js">function bar(obj) {
+  return Promise.resolve(obj)
+}
+</code></pre>
+<p>resolve 参数形态：</p>
+<ul>
+<li>参数本身是 Promise</li>
+<li>参数是原始值/对象</li>
+<li>参数是一个 thenable</li>
+</ul>
+<h4 id="2-reject-方法"><a class="header" href="#2-reject-方法">2. reject 方法</a></h4>
+<p>与<code>Promise.resolve()</code>方法逻辑基本相同，只不过<code>Promise.reject()</code>相当于创建一个 Promise 实例，并且 rejected 了</p>
+<pre><code class="language-js">Promise.reject('error').catch(error =&gt; {
+  console.log('error', error)
+})
+</code></pre>
+<blockquote>
+<p>注意：与<code>Promise.resolve()</code>不同的是，<code>Promise.reject()</code>无论传递什么参数都会原样输出</p>
+</blockquote>
+<pre><code class="language-js">Promise.reject(
+  new Promise(resolve =&gt; {
+    resolve('hello')
+  })
+).catch(err =&gt; {
+  // 原样打印 Promise 实例
+  console.log('err', err)
+})
+</code></pre>
+<h4 id="3-all-方法"><a class="header" href="#3-all-方法">3. all 方法</a></h4>
+<pre><code>Promise.all()`接收一个`Promise[]`，返回一个`Promise`实例，当所有的 Promise 执行完毕并且都是`fulfilled`时，该实例的状态才会变为`fulfilled`，只要队列中有一个实例的状态是`rejected`，那么该实例的状态也会变为`rejected
+</code></pre>
+<p>如果 Promise 队列中所有的实例状态都是<code>fulfilled</code>，那么<code>Promise.all()</code>返回的实例的状态就会变为<code>fulfilled</code>，并且<code>resolve()</code>的参数是一个数组，按照顺序放置队列中每个 Promise 成功后的结果</p>
+<pre><code class="language-js">let i = 0
+function genPromise() {
+  return new Promise(resolve =&gt; {
+    resolve(`success${(i = i + 1)}`)
+  })
+}
+
+const promiseArr = [genPromise(), genPromise(), genPromise()]
+
+Promise.all(promiseArr).then(res =&gt; {
+  // [ 'success1', 'success2', 'success3' ]
+  console.log('res', res)
+})
+</code></pre>
+<p>如果队列中 Promise 实例有一个是<code>rejected</code>，那么<code>Promise.all()</code>返回的实例就会变为<code>rejected</code>状态，并且<code>reject()</code>参数是队列中第一个<code>rejected</code>的返回值</p>
+<pre><code class="language-js">const promiseArr = [
+  genPromise(),
+  new Promise((resolve, reject) =&gt; {
+    reject('error1')
+  }),
+  new Promise((resolve, reject) =&gt; {
+    reject('error2')
+  }),
+]
+
+Promise.all(promiseArr)
+  .then(res =&gt; {})
+  .catch(err =&gt; {
+    // error 1
+    console.log(err)
+  })
+</code></pre>
+<h4 id="4-allsettled-方法"><a class="header" href="#4-allsettled-方法">4. allSettled 方法</a></h4>
+<p><code>all</code>方法是有缺陷的，如果在 Promise 队列中有一个状态是 rejected，那么我们就无法获取到其他 fullfilled 以及 pending 的 Promise 实例了。</p>
+<p>针对这一情况，在 ES11(ES2020) 中新增了一个 API，<code>Promise.allSettled()</code></p>
+<ul>
+<li>该方法返回的 Promise 实例，会在所有 Promise 实例执行完毕后，状态方可变为<code>fulfilled</code>，并且只会是<code>fulfilled</code></li>
+<li>无论队列中的Promise 实例的状态如何，都能获取到结果</li>
+<li>打印的结果，会包含状态与值/原因</li>
+</ul>
+<pre><code class="language-js">const promiseArr = [
+  new Promise((resolve, reject) =&gt; {
+    resolve('success1')
+  }),
+  new Promise((resolve, reject) =&gt; {
+    reject('error')
+  }),
+  new Promise((resolve, reject) =&gt; {
+    resolve('success2')
+  }),
+]
+
+Promise.allSettled(promiseArr).then(res =&gt; {
+  // res [
+  //   { status: 'fulfilled', value: 'success1' },
+  //   { status: 'rejected', reason: 'error' },
+  //   { status: 'fulfilled', value: 'success2' }
+  // ]
+  console.log('res', res)
+})
+</code></pre>
+<h4 id="5-race-方法"><a class="header" href="#5-race-方法">5. race 方法</a></h4>
+<p><code>Promise.race()</code>同样接收一个 Promise 队列，返回一个 Promise 实例。该方法会对队列任务完成情况进行监听，如果某一个任务最先完成<code>fulfilled/rejected</code>，那么返回的实例的状态也会变成对应的<code>fulfilled/rejected</code>，同时获取到最先完成的结果</p>
+<pre><code class="language-js">const promiseArr = [
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      resolve('success1')
+    }, 1000)
+  }),
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      reject('error')
+    }, 2000)
+  }),
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      resolve('success2')
+    }, 3000)
+  }),
+]
+
+Promise.race(promiseArr)
+  .then(res =&gt; {
+    console.log('res', res)
+  })
+  .catch(err =&gt; {
+    console.log('err', err)
+  })
+// 最终打印 res success1
+// 如果第二个任务最先完成，那么就会打印 err error
+</code></pre>
+<h4 id="6-any-方法"><a class="header" href="#6-any-方法">6. any 方法</a></h4>
+<p><code>Promise.any()</code>是 ES12 新增的特性，和<code>Promise.race()</code>类似，区别在于：</p>
+<ul>
+<li>any 方法会等待一个<code>fulfilled</code>状态，才会决定返回 Promise 实例的状态</li>
+<li>如果队列中所有的实例都是<code>rejected</code>状态，那也需要等到所有执行完毕后才会决定返回的 Promise 实例的状态</li>
+</ul>
+<pre><code class="language-js">const promiseArr = [
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      resolve('success1')
+    }, 2200)
+  }),
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      reject('error')
+    }, 2000)
+  }),
+  new Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      resolve('success2')
+    }, 3000)
+  }),
+]
+
+Promise.any(promiseArr)
+  .then(res =&gt; {
+    console.log('res', res)
+  })
+  .catch(err =&gt; {
+    console.log('err', err)
+  })
+// 遇到第一个 fulfilled，就会转变返回的 Promise 实例的状态
+// 如果所有的都是 rejected，那么只有所有执行完毕后，返回的 Promise 实例才会转变
+// 并且会抛出一个错误：[AggregateError: All promises were rejected]
+</code></pre>
+<p>简单理解来说，<code>Promise.any()</code>会等待第一个<code>fulfilled</code>的 Promise ，如果队列中没有<code>fulfilled</code>，那么就会返回一个错误</p>
+<h2 id="3-手写-promise-的实现"><a class="header" href="#3-手写-promise-的实现">3. 手写 Promise 的实现</a></h2>
+<p>为了更好的梳理思路，可以采用测试先行的方式来实现 Promise，这里我使用<code>jest</code>作为功能测试框架</p>
+<p>带有注释的是每一步新增的代码</p>
+<h3 id="31-constructor"><a class="header" href="#31-constructor">3.1 constructor</a></h3>
+<h4 id="1-应该立刻执行构造函数传入的代码"><a class="header" href="#1-应该立刻执行构造函数传入的代码">1. 应该立刻执行构造函数传入的代码</a></h4>
+<pre><code class="language-js">test('应该立刻执行构造函数传入的代码', () =&gt; {
+  let timer = 0
+  new _Promise(() =&gt; {
+    timer++
+  })
+  expect(timer).toBe(1)
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor) {
+    executor()
+  }
+}
+</code></pre>
+<h4 id="2-promise-有-3-种状态"><a class="header" href="#2-promise-有-3-种状态">2. promise 有 3 种状态</a></h4>
+<pre><code class="language-js">test('promise 有 3 种状态', () =&gt; {
+  const p1 = new _Promise()
+  expect(p1.status).toBe('pending')
+  const p2 = new _Promise(resolve =&gt; resolve())
+  expect(p2.status).toBe('fulfilled')
+  const p3 = new _Promise((resolve, reject) =&gt; reject())
+  expect(p3.status).toBe('rejected')
+})
+</code></pre>
+<pre><code class="language-js">// 新增 3 种状态
+const STATUS_PENDING = 'pending'
+const STATUS_FULFILLED = 'fulfilled'
+const STATUS_REJECTED = 'rejected'
+
+class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 立即执行构造函数，并且状态变为 pending
+    this.status = STATUS_PENDING
+    const resolve = () =&gt; {
+      // 执行 resolve 后，状态变为 fulfilled
+      this.status = STATUS_FULFILLED
+    }
+    const reject = () =&gt; {
+      // 执行 reject 后，状态变为 rejected
+      this.status = STATUS_REJECTED
+    }
+    // 传入的回调会有两个参数 resolve/reject
+    executor(resolve, reject)
+  }
+}
+</code></pre>
+<h4 id="3-执行-resolvereject-后状态固化"><a class="header" href="#3-执行-resolvereject-后状态固化">3. 执行 resolve、reject 后状态固化</a></h4>
+<pre><code class="language-js">test('执行 resolve、reject 后状态固化 ', () =&gt; {
+  const p1 = new _Promise((resolve, reject) =&gt; {
+    resolve()
+    reject()
+  })
+  expect(p1.status).toBe('fulfilled')
+  const p2 = new _Promise((resolve, reject) =&gt; {
+    reject()
+    resolve()
+  })
+  expect(p2.status).toBe('rejected')
+})
+</code></pre>
+<pre><code class="language-js">const STATUS_PENDING = 'pending'
+const STATUS_FULFILLED = 'fulfilled'
+const STATUS_REJECTED = 'rejected'
+
+export class _Promise {
+  constructor(executor = () =&gt; {}) {
+    this.status = STATUS_PENDING
+    const resolve = () =&gt; {
+      // 如果状态时 PENDING 时才会执行代码
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_FULFILLED
+      }
+    }
+    const reject = () =&gt; {
+      // 如果状态时 PENDING 时才会执行代码
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_REJECTED
+      }
+    }
+    executor(resolve, reject)
+  }
+}
+</code></pre>
+<h3 id="32-then"><a class="header" href="#32-then">3.2 then</a></h3>
+<h4 id="1-then-方法可以接收两个参数可以处理-resolve-和-reject"><a class="header" href="#1-then-方法可以接收两个参数可以处理-resolve-和-reject">1. then 方法可以接收两个参数，可以处理 resolve 和 reject</a></h4>
+<pre><code class="language-js">test('then 方法可以接收两个参数，可以处理 resolve 和 reject', () =&gt; {
+  new _Promise(resolve =&gt; {
+    resolve('success')
+  }).then(res =&gt; {
+    expect(res).toBe('success')
+  })
+  new _Promise((resolve, reject) =&gt; {
+    reject('error')
+  }).then(undefined, err =&gt; {
+    expect(err).toBe('error')
+  })
+})
+</code></pre>
+<pre><code class="language-js">const STATUS_PENDING = 'pending'
+const STATUS_FULFILLED = 'fulfilled'
+const STATUS_REJECTED = 'rejected'
+
+export class _Promise {
+  constructor(executor = () =&gt; {}) {
+    this.status = STATUS_PENDING
+    this.value = undefined
+    this.reason = undefined
+    // resolve 需要接收一个参数
+    const resolve = value =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_FULFILLED
+        // 将接收的参数保存在 Promise 种
+        this.value = value
+      }
+    }
+    // reject 也可以接收一个参数
+    const reject = reason =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_REJECTED
+        this.reason = reason
+      }
+    }
+    executor(resolve, reject)
+  }
+  // 实例方法 then
+  then(onFulfilled, onRejected) {
+    if (onFulfilled) onFulfilled(this.value)
+    if (onRejected) onRejected(this.reason)
+  }
+}
+</code></pre>
+<h4 id="2-executor-可以是一个异步函数"><a class="header" href="#2-executor-可以是一个异步函数">2. executor 可以是一个异步函数</a></h4>
+<pre><code class="language-js">test('executor 可以是一个异步函数', () =&gt; {
+  new _Promise(resolve =&gt; {
+    setTimeout(() =&gt; {
+      resolve('success')
+    }, 300)
+  }).then(res =&gt; {
+    expect(res).toBe('success')
+  })
+  new _Promise((resolve, reject) =&gt; {
+    setTimeout(() =&gt; {
+      reject('error')
+    }, 300)
+  }).then(undefined, err =&gt; {
+    expect(err).toBe('error')
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    this.status = STATUS_PENDING
+    this.value = undefined
+    this.reason = undefined
+    // 因为可以执行多次 then，因此需要将所有的任务放在一个队列中
+    this.resolveQueue = []
+    this.rejectQueue = []
+    const resolve = value =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_FULFILLED
+        this.value = value
+        // 在 resolve 时执行 resolveQueue 所有的任务
+        if (this.resolveQueue.length)
+          this.resolveQueue.forEach(item =&gt; item(this.value))
+      }
+    }
+    const reject = reason =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_REJECTED
+        this.reason = reason
+        // 在 reject 时执行 rejectQueue 所有的任务
+        if (this.rejectQueue.length)
+          this.rejectQueue.forEach(item =&gt; item(this.reason))
+      }
+    }
+    executor(resolve, reject)
+  }
+  then(onFulfilled, onRejected) {
+    // 由于 executor 可能是一个异步函数，所以就不能直接来执行
+    // 传入的参数了，需要做一下状态判断
+    // 如果执行 then 时 Promise 实例的状态已经变化，那么就可以直接执行传入的参数
+    if (this.status === STATUS_FULFILLED &amp;&amp; onFulfilled) {
+      onFulfilled(this.value)
+    }
+    if (this.status === STATUS_REJECTED &amp;&amp; onRejected) {
+      onRejected(this.reason)
+    }
+    // 如果在执行 then 的时候当前的状态还是 PENDING
+    // 那么就加入队列中，等待执行 resolve、reject 的时候统一执行所有的队列
+    if (this.status === STATUS_PENDING) {
+      // 将任务放到相应队列中
+      if (onFulfilled) this.resolveQueue.push(onFulfilled)
+      if (onRejected) this.resolveQueue.push(onRejected)
+    }
+  }
+}
+</code></pre>
+<h4 id="3-如果构造函数抛出了一个错误then-的第二个参数也可以捕获到"><a class="header" href="#3-如果构造函数抛出了一个错误then-的第二个参数也可以捕获到">3. 如果构造函数抛出了一个错误，then 的第二个参数也可以捕获到</a></h4>
+<pre><code class="language-js">test('如果构造函数抛出了一个错误，then 的第二个参数也可以捕获到', () =&gt; {
+  new _Promise(() =&gt; {
+    throw new Error('error!')
+  }).then(undefined, err =&gt; {
+    expect(err).toEqual(new Error('error!'))
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    this.status = STATUS_PENDING
+    this.value = undefined
+    this.reason = undefined
+    this.resolveQueue = []
+    this.rejectQueue = []
+    const resolve = value =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_FULFILLED
+        this.value = value
+        if (this.resolveQueue.length)
+          this.resolveQueue.forEach(item =&gt; item(this.value))
+      }
+    }
+    const reject = reason =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_REJECTED
+        this.reason = reason
+        if (this.rejectQueue.length)
+          this.rejectQueue.forEach(item =&gt; item(this.reason))
+      }
+    }
+    // try...catch 捕获一下错误
+    try {
+      executor(resolve, reject)
+    } catch (error) {
+      reject(error)
+    }
+  }
+  then(onFulfilled, onRejected) {
+    // then code 无变化
+  }
+}
+</code></pre>
+<h4 id="4-链式调用"><a class="header" href="#4-链式调用">4. 链式调用</a></h4>
+<pre><code class="language-js">test('链式调用', () =&gt; {
+  new _Promise(resolve =&gt; {
+    resolve('success1')
+  })
+    .then(res =&gt; {
+      expect(res).toBe('success1')
+      return res + ' success2'
+    })
+    .then(res =&gt; {
+      expect(res).toBe('success1 success2')
+    })
+  new _Promise((resolve, reject) =&gt; {
+    reject('error1')
+  })
+    .then(undefined, err =&gt; {
+      expect(err).toBe('error1')
+      return err + ' error2'
+    })
+    .then(res =&gt; {
+      expect(res).toBe('error1 error2')
+    })
+})
+</code></pre>
+<pre><code class="language-js">_Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // 要想做到链式调用，就需要返回新的 Promise
+    return new Promise((resolve, reject) =&gt; {
+      if (this.status === STATUS_FULFILLED &amp;&amp; onFulfilled) {
+        // 将 onFulfilled 返回的值作为下一个 Promise resolve() 的值
+        const value = onFulfilled(this.value)
+        resolve(value)
+      }
+      if (this.status === STATUS_REJECTED &amp;&amp; onRejected) {
+        // 这个也是同理
+        const reason = onRejected(this.reason)
+        resolve(reason)
+      }
+      if (this.status === STATUS_PENDING) {
+        // 这里需要做一下处理了，因为这里队列是在构造函数中处理的
+        // 所以需要转化一下
+        if (onFulfilled)
+          this.resolveQueue.push(param =&gt; {
+            const value = onFulfilled(param)
+            resolve(value)
+          })
+        if (onRejected)
+          this.resolveQueue.push(param =&gt; {
+            const reason = onRejected(param)
+            resolve(reason)
+          })
+      }
+    })
+  }
+}
+</code></pre>
+<h4 id="5-在链式调用的过程中出现任何错误将由下面的-then-第二个参数处理"><a class="header" href="#5-在链式调用的过程中出现任何错误将由下面的-then-第二个参数处理">5. 在链式调用的过程中出现任何错误，将由下面的 then 第二个参数处理</a></h4>
+<pre><code class="language-js">test('在链式调用的过程中出现任何错误，将由下面的 then 第二个参数处理', () =&gt; {
+  new _Promise((resolve, reject) =&gt; {
+    resolve('success')
+  })
+    .then(res =&gt; {
+      expect(res).toBe('success')
+      throw new Error('error!')
+    })
+    .then(undefined, err =&gt; {
+      expect(err).toEqual(new Error('error!'))
+    })
+})
+</code></pre>
+<pre><code class="language-js">// 因为需要对 4 个地方同时进行 try...catch
+// 重复代码，就可以抽离为工具函数了
+function executeFnWithCatchError(fn, param, resolve, reject) {
+  try {
+    const result = fn(param)
+    resolve(result)
+  } catch (error) {
+    reject(error)
+  }
+}
+
+class _Promise {
+  constructor(executor = () =&gt; {}) {
+      // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    return new Promise((resolve, reject) =&gt; {
+      if (this.status === STATUS_FULFILLED &amp;&amp; onFulfilled) {
+        // 在这里进行捕获
+        executeFnWithCatchError(onFulfilled, this.value, resolve, reject)
+      }
+      if (this.status === STATUS_REJECTED &amp;&amp; onRejected) {
+        // 在这里进行捕获
+        executeFnWithCatchError(onRejected, this.reason, resolve, reject)
+      }
+      if (this.status === STATUS_PENDING) {
+        if (onFulfilled)
+          this.resolveQueue.push(param =&gt; {
+            // 在这里进行捕获
+            executeFnWithCatchError(onFulfilled, param, resolve, reject)
+          })
+        if (onRejected)
+          this.resolveQueue.push(param =&gt; {
+            // 在这里进行捕获
+            executeFnWithCatchError(onRejected, param, resolve, reject)
+          })
+      }
+    })
+  }
+}
+</code></pre>
+<h3 id="33-catch"><a class="header" href="#33-catch">3.3 catch</a></h3>
+<h4 id="1-catch-应该捕获上一个-promise-实例的-reject"><a class="header" href="#1-catch-应该捕获上一个-promise-实例的-reject">1. catch 应该捕获上一个 Promise 实例的 reject</a></h4>
+<pre><code class="language-js">test('catch 应该捕获上一个 Promise 实例的 reject ', () =&gt; {
+  new _Promise((resolve, reject) =&gt; {
+    reject('error')
+  }).catch(err =&gt; {
+    expect(err).toBe('error')
+  })
+  new _Promise((resolve, reject) =&gt; {
+    resolve('success')
+  })
+    .then(() =&gt; {
+      throw new Error('error')
+    })
+    .catch(err =&gt; {
+      expect(err).toEqual(new Error('error'))
+    })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 方法无变化
+  }
+  // 新增实例方法 catch
+  catch(onRejected) {
+    // 这里其实可以直接复用 then 的逻辑
+    // 将传入的数据作为 then 的第二个参数
+    this.then(undefined, onRejected)
+  }
+}
+</code></pre>
+<h4 id="2-catch-可以捕获最开始的-reject"><a class="header" href="#2-catch-可以捕获最开始的-reject">2. catch 可以捕获最开始的 reject</a></h4>
+<pre><code class="language-js">test('catch 可以捕获最开始的 reject ', () =&gt; {
+  new Promise((resolve, reject) =&gt; {
+    reject('error')
+  })
+    .then(res =&gt; {
+      return res
+    })
+    .then(res =&gt; {
+      return res
+    })
+    .catch(err =&gt; {
+      console.log('error', err)
+      expect(err).toBe('error')
+    })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // 针对这一情况，可以给两个参数写一个默认值
+    onFulfilled = onFulfilled
+      ? onFulfilled
+      : value =&gt; {
+          return value
+        }
+    onRejected = onRejected
+      ? onRejected
+      : reason =&gt; {
+          throw new Error(reason)
+        }
+    return new Promise((resolve, reject) =&gt; {
+      // 判断就可以删除掉了，因为传入的两个参数是必定有值的
+      if (this.status === STATUS_FULFILLED) {
+        executeFnWithCatchError(onFulfilled, this.value, resolve, reject)
+      }
+      if (this.status === STATUS_REJECTED) {
+        executeFnWithCatchError(onRejected, this.reason, resolve, reject)
+      }
+      if (this.status === STATUS_PENDING) {
+        this.resolveQueue.push(param =&gt; {
+          executeFnWithCatchError(onFulfilled, param, resolve, reject)
+        })
+        this.resolveQueue.push(param =&gt; {
+          executeFnWithCatchError(onRejected, param, resolve, reject)
+        })
+      }
+    })
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+}
+</code></pre>
+<h3 id="34-finally"><a class="header" href="#34-finally">3.4 finally</a></h3>
+<pre><code class="language-js">test('无论 Promise 状态是满足还是拒绝，finally 都应该执行', () =&gt; {
+  let finallyTimer = 0
+  new _Promise(resolve =&gt; {
+    resolve('hello world')
+  }).finally(() =&gt; {
+    finallyTimer++
+  })
+  expect(finallyTimer).toBe(1)
+  new _Promise((resolve, reject) =&gt; {
+    reject('hello world')
+  }).finally(() =&gt; {
+    finallyTimer++
+  })
+  expect(finallyTimer).toBe(2)
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  // 新增实例方法 finally
+  finally(onFinally) {
+    // 复用 then 逻辑，传入 onFinally
+    this.then(
+      () =&gt; {
+        onFinally()
+      },
+      () =&gt; {
+        onFinally()
+      }
+    )
+  }
+}
+</code></pre>
+<h3 id="35-resolve"><a class="header" href="#35-resolve">3.5 resolve</a></h3>
+<p>resolve 是 Promise 的类方法，可以将传入的值作为<code>resolve()</code>的参数，即：</p>
+<pre><code class="language-js">Promise.resolve("success")
+// 等于下面
+new Promise(resolve =&gt; {
+    resolve('success')
+})
+</code></pre>
+<pre><code class="language-js">test('resolve 可以将一个传入的值作为 resolve() 的参数', () =&gt; {
+  const data = { name: 'alex' }
+  Promise.resolve(data).then(res =&gt; {
+    expect(res).toEqual(data)
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  // 新增类方法
+  static resolve(data) {
+    return new _Promise(resolve =&gt; resolve(data))
+  }
+}
+</code></pre>
+<h3 id="36-reject"><a class="header" href="#36-reject">3.6 reject</a></h3>
+<p>和 resolve 的逻辑是一样的</p>
+<pre><code class="language-js">test('reject 可以将传入的值作为 reject() 的参数', () =&gt; {
+  _Promise.reject('error').catch(err =&gt; {
+    expect(err).toBe('error')
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  static resolve(data) {
+    // resolve 无变化
+  }
+  // 新增类方法 reject
+  static reject(data) {
+    return new _Promise((resolve, reject) =&gt; reject(data))
+  }
+}
+</code></pre>
+<h3 id="37-all"><a class="header" href="#37-all">3.7 all</a></h3>
+<pre><code class="language-js">test('all 方法接收队列，所有 fulfilled 即 fulfilled，一个 rejected 则 rejected', () =&gt; {
+  function genPromise(index) {
+    return new _Promise(resolve =&gt; {
+      resolve('success' + index)
+    })
+  }
+  const promiseQueue = [
+    genPromise(0),
+    genPromise(1),
+    genPromise(2),
+    genPromise(3),
+  ]
+  _Promise.all(promiseQueue).then(res =&gt; {
+    expect(res).toEqual(['success0', 'success1', 'success2', 'success3'])
+  })
+  const promiseQueue2 = [
+    ...promiseQueue,
+    new _Promise((resolve, reject) =&gt; reject('error')),
+  ]
+  _Promise.all(promiseQueue2).catch(err =&gt; {
+    expect(err).toBe('error')
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  static resolve(data) {
+    // resolve 无变化
+  }
+  static reject(data) {
+    // reject 无变化
+  }
+  // 新增类方法
+  static all(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      const result = []
+      // 对队列进行遍历
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            result.push(res)
+          })
+          .catch(err =&gt; {
+            // 任何一个 reject 那么就直接 reject
+            reject(err)
+          })
+      })
+      // 所有的 resolve，才 resolve
+      resolve(result)
+    })
+  }
+}
+</code></pre>
+<h3 id="38-allsettled"><a class="header" href="#38-allsettled">3.8 allSettled</a></h3>
+<pre><code class="language-js">test('allSettled 无论 promise 队列是 fulfilled 还是 rejected，都会保存起来，并且只会是 fulfilled', () =&gt; {
+  function genPromise(index) {
+    return new Promise(resolve =&gt; {
+      resolve('success' + index)
+    })
+  }
+  const promiseQueue = [genPromise(0), genPromise(1), genPromise(2)]
+  Promise.allSettled(promiseQueue).then(res =&gt; {
+    expect(res).toEqual([
+      { status: 'fulfilled', value: 'success0' },
+      { status: 'fulfilled', value: 'success1' },
+      { status: 'fulfilled', value: 'success2' },
+    ])
+  })
+  const promiseQueue2 = [
+    ...promiseQueue,
+    new Promise((resolve, reject) =&gt; reject('error')),
+  ]
+  Promise.allSettled(promiseQueue2).catch(err =&gt; {
+    expect(err).toEqual([
+      { status: 'fulfilled', value: 'success0' },
+      { status: 'fulfilled', value: 'success1' },
+      { status: 'fulfilled', value: 'success2' },
+      { status: 'rejected', reason: 'error' },
+    ])
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  static resolve(data) {
+    // resolve 无变化
+  }
+  static reject(data) {
+    // reject 无变化
+  }
+  static all(promiseQueue) {
+    // all 无变化
+  }
+  // 新增类方法：allSettled
+  static allSettled(promiseQueue) {
+    return new _Promise(resolve =&gt; {
+      const result = []
+      // 遍历队列，满足 or 拒绝都加入返回队列中
+      // 只是状态和 value/reason 不同
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            result.push({
+              status: STATUS_FULFILLED,
+              value: res,
+            })
+          })
+          .catch(err =&gt; {
+            result.push({
+              status: STATUS_REJECTED,
+              reason: err,
+            })
+          })
+      })
+      resolve(result)
+    })
+  }
+}
+</code></pre>
+<h3 id="39-race"><a class="header" href="#39-race">3.9 race</a></h3>
+<pre><code class="language-js">test('队列中哪个最先完成，那么 race 返回的实例就是什么状态', () =&gt; {
+  function genPromise(delay, message, type = 'fulfilled') {
+    if (type === 'fulfilled') {
+      return new _Promise(resolve =&gt; {
+        setTimeout(() =&gt; {
+          resolve(message)
+        }, delay)
+      })
+    }
+    return new _Promise((resolve, reject) =&gt; {
+      setTimeout(() =&gt; {
+        reject(message)
+      }, delay)
+    }, delay)
+  }
+  const promiseQueue = [
+    genPromise(200, 'success1'),
+    genPromise(100, 'success2'),
+    genPromise(300, 'success3'),
+  ]
+  _Promise.race(promiseQueue).then(res =&gt; {
+    expect(res).toBe('success2')
+  })
+  const promiseQueue2 = [...promiseQueue, genPromise(50, 'error', 'rejected')]
+  _Promise.race(promiseQueue2).catch(err =&gt; {
+    expect(err).toBe('error')
+  })
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  static resolve(data) {
+    // resolve 无变化
+  }
+  static reject(data) {
+    // reject 无变化
+  }
+  static all(promiseQueue) {
+    // all 无变化
+  }
+  // 新增类方法：allSettled
+  static allSettled(promiseQueue) {
+    // allSettled 无变化
+  }
+    // 新增类方法 race
+  static race(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      // 遍历队列
+      promiseQueue.forEach(promise =&gt; {
+        // 有一个改变了状态，那么整体就改变了状态
+        promise
+          .then(res =&gt; {
+            resolve(res)
+          })
+          .catch(err =&gt; {
+            reject(err)
+          })
+      })
+    })
+  }
+}
+</code></pre>
+<h3 id="310-any"><a class="header" href="#310-any">3.10 any</a></h3>
+<pre><code class="language-js">test('any 方法接收一个 Promise 队列，只要一个是 fulfilled 状态，就改变返回的实例状态，如果所有都是 rejected，也要等待所有执行完毕后，抛出一个错误', () =&gt; {
+  function genPromise(delay, message, type = 'fulfilled') {
+    if (type === 'fulfilled') {
+      return new _Promise(resolve =&gt; {
+        setTimeout(() =&gt; {
+          resolve(message)
+        }, delay)
+      })
+    }
+    return new _Promise((resolve, reject) =&gt; {
+      setTimeout(() =&gt; {
+        reject(message)
+      }, delay)
+    }, delay)
+  }
+  const promiseQueue = [
+    genPromise(100, 'error1', 'rejected'),
+    genPromise(200, 'success1'),
+    genPromise(300, 'error2', 'rejected'),
+  ]
+  _Promise
+    .any(promiseQueue)
+    .then(res =&gt; {
+      expect(res).toBe('success1')
+    })
+    .catch(() =&gt; {})
+  const promiseQueue2 = [
+    genPromise(100, 'error11', 'rejected'),
+    genPromise(200, 'error22', 'rejected'),
+    genPromise(300, 'error33', 'rejected'),
+  ]
+  try {
+    _Promise.any(promiseQueue2).catch(err =&gt; {})
+  } catch (error) {
+    expect(error).toEqual(new AggregateError('All promises were rejected'))
+  }
+})
+</code></pre>
+<pre><code class="language-js">class _Promise {
+  constructor(executor = () =&gt; {}) {
+    // 构造函数无变化
+  }
+  then(onFulfilled, onRejected) {
+    // then 无变化
+  }
+  catch(onRejected) {
+    // catch 无变化
+  }
+  finally(onFinally) {
+    // finally 无变化
+  }
+  static resolve(data) {
+    // resolve 无变化
+  }
+  static reject(data) {
+    // reject 无变化
+  }
+  static all(promiseQueue) {
+    // all 无变化
+  }
+  static allSettled(promiseQueue) {
+    // allSettled 无变化
+  }
+  static race(promiseQueue) {
+    // race 无变化   
+  }
+  // 新增类方法 any
+  static any(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      const reasons = []
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            // 只要有一个满足，那么就满足
+            resolve(res)
+          })
+          .catch(err =&gt; {
+            reasons.push(err)
+          })
+      })
+      // 如果全部拒绝，那么就抛出一个错误
+      if (reasons.length === promiseQueue.length) {
+        throw new AggregateError()
+      }
+    })
+  }
+}
+</code></pre>
+<h3 id="311-全部"><a class="header" href="#311-全部">3.11 全部</a></h3>
+<p>最后，关于 Promise 的功能和 API 我们已经初步实现完毕了，当然，一些边界判断是没有加的。</p>
+<p>让我们看一下全部代码吧：</p>
+<pre><code class="language-js">const STATUS_PENDING = 'pending'
+const STATUS_FULFILLED = 'fulfilled'
+const STATUS_REJECTED = 'rejected'
+
+function executeFnWithCatchError(fn, param, resolve, reject) {
+  try {
+    const result = fn(param)
+    resolve(result)
+  } catch (error) {
+    reject(error)
+  }
+}
+
+export class _Promise {
+  constructor(executor = () =&gt; {}) {
+    this.status = STATUS_PENDING
+    this.value = undefined
+    this.reason = undefined
+    this.resolveQueue = []
+    this.rejectQueue = []
+    const resolve = value =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_FULFILLED
+        this.value = value
+        if (this.resolveQueue.length)
+          this.resolveQueue.forEach(item =&gt; item(this.value))
+      }
+    }
+    const reject = reason =&gt; {
+      if (this.status === STATUS_PENDING) {
+        this.status = STATUS_REJECTED
+        this.reason = reason
+        if (this.rejectQueue.length)
+          this.rejectQueue.forEach(item =&gt; item(this.reason))
+      }
+    }
+    try {
+      executor(resolve, reject)
+    } catch (error) {
+      reject(error)
+    }
+  }
+  then(onFulfilled, onRejected) {
+    onFulfilled = onFulfilled
+      ? onFulfilled
+      : value =&gt; {
+          return value
+        }
+    onRejected = onRejected
+      ? onRejected
+      : reason =&gt; {
+          throw new Error(reason)
+        }
+    return new Promise((resolve, reject) =&gt; {
+      if (this.status === STATUS_FULFILLED) {
+        executeFnWithCatchError(onFulfilled, this.value, resolve, reject)
+      }
+      if (this.status === STATUS_REJECTED) {
+        executeFnWithCatchError(onRejected, this.reason, resolve, reject)
+      }
+      if (this.status === STATUS_PENDING) {
+        this.resolveQueue.push(param =&gt; {
+          executeFnWithCatchError(onFulfilled, param, resolve, reject)
+        })
+        this.resolveQueue.push(param =&gt; {
+          executeFnWithCatchError(onRejected, param, resolve, reject)
+        })
+      }
+    })
+  }
+  catch(onRejected) {
+    this.then(undefined, onRejected)
+  }
+  finally(onFinally) {
+    this.then(
+      () =&gt; {
+        onFinally()
+      },
+      () =&gt; {
+        onFinally()
+      }
+    )
+  }
+  static resolve(data) {
+    return new _Promise(resolve =&gt; resolve(data))
+  }
+  static reject(data) {
+    return new _Promise((resolve, reject) =&gt; reject(data))
+  }
+  static all(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      const result = []
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            result.push(res)
+          })
+          .catch(err =&gt; {
+            reject(err)
+          })
+      })
+      resolve(result)
+    })
+  }
+  static allSettled(promiseQueue) {
+    return new _Promise(resolve =&gt; {
+      const result = []
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            result.push({
+              status: STATUS_FULFILLED,
+              value: res,
+            })
+          })
+          .catch(err =&gt; {
+            result.push({
+              status: STATUS_REJECTED,
+              reason: err,
+            })
+          })
+      })
+      resolve(result)
+    })
+  }
+  static race(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            resolve(res)
+          })
+          .catch(err =&gt; {
+            reject(err)
+          })
+      })
+    })
+  }
+  static any(promiseQueue) {
+    return new _Promise((resolve, reject) =&gt; {
+      const reasons = []
+      promiseQueue.forEach(promise =&gt; {
+        promise
+          .then(res =&gt; {
+            resolve(res)
+          })
+          .catch(err =&gt; {
+            reasons.push(err)
+          })
+      })
+      if (reasons.length === promiseQueue.length) {
+        throw new AggregateError()
+      }
+    })
+  }
+}
+</code></pre>
+<h1 id="总结"><a class="header" href="#总结">总结</a></h1>
+<p>本文详细讲解了 Promise 以及手写了 Promise 的逻辑，希望对你有所帮助</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../Vue/js/js的可选链运算符.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../Vue/pinia/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../Vue/js/js的可选链运算符.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../Vue/pinia/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

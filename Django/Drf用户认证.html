@@ -1,0 +1,732 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Drf 用户认证 - 浩瀚星河</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html"><strong aria-hidden="true">1.</strong> 首页</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded "><a href="../操作系统/index.html"><strong aria-hidden="true">2.</strong> 操作系统</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../操作系统/操作系统的定义.html"><strong aria-hidden="true">2.1.</strong> 操作系统的定义</a></li><li class="chapter-item expanded "><a href="../操作系统/进程.html"><strong aria-hidden="true">2.2.</strong> 进程</a></li><li class="chapter-item expanded "><a href="../操作系统/操作系统总结.html"><strong aria-hidden="true">2.3.</strong> 操作系统总结</a></li><li class="chapter-item expanded "><a href="../操作系统/Linux指令.html"><strong aria-hidden="true">2.4.</strong> Linux 指令</a></li></ol></li><li class="chapter-item expanded "><a href="../Git/index.html"><strong aria-hidden="true">3.</strong> Git</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Git/git创建补丁.html"><strong aria-hidden="true">3.1.</strong> git 创建补丁</a></li><li class="chapter-item expanded "><a href="../Git/git命令.html"><strong aria-hidden="true">3.2.</strong> git 命令</a></li><li class="chapter-item expanded "><a href="../Git/git在Jetbrains中的使用.html"><strong aria-hidden="true">3.3.</strong> git 在 Jetbrains 中的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Docker/index.html"><strong aria-hidden="true">4.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Docker/GVC配置.html"><strong aria-hidden="true">4.1.</strong> GVC配置</a></li><li class="chapter-item expanded "><a href="../Docker/blog-readme.html"><strong aria-hidden="true">4.2.</strong> Blog Readme</a></li><li class="chapter-item expanded "><a href="../Docker/docker-compose命令.html"><strong aria-hidden="true">4.3.</strong> docker-compose 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker命令.html"><strong aria-hidden="true">4.4.</strong> docker 命令</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署gin,vue博客.html"><strong aria-hidden="true">4.5.</strong> docker 部署 gin,vue 博客</a></li><li class="chapter-item expanded "><a href="../Docker/docker部署ollama.html"><strong aria-hidden="true">4.6.</strong> docker 部署 ollama</a></li><li class="chapter-item expanded "><a href="../Docker/gin-vue-community.html"><strong aria-hidden="true">4.7.</strong> Gin Vue Community</a></li><li class="chapter-item expanded "><a href="../Docker/数据库的设计.html"><strong aria-hidden="true">4.8.</strong> 数据库的设计</a></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Typescript/index.html"><strong aria-hidden="true">5.</strong> Typescript</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/index.html"><strong aria-hidden="true">5.1.</strong> 一.变量的类型</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中哪些判断条件是true,哪些是false.html"><strong aria-hidden="true">5.1.1.</strong> ts 中哪些判断条件是 true,哪些是 false</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的基本类型.html"><strong aria-hidden="true">5.1.2.</strong> ts 中的基本类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中变量的任意类型.html"><strong aria-hidden="true">5.1.3.</strong> ts 中变量的任意类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的Object和object.html"><strong aria-hidden="true">5.1.4.</strong> ts 中的 Object 和 object</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的接口和对象类型.html"><strong aria-hidden="true">5.1.5.</strong> ts 中的接口和对象类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的数组类型.html"><strong aria-hidden="true">5.1.6.</strong> ts 中的数组类型</a></li><li class="chapter-item expanded "><a href="../Typescript/一.变量的类型/ts中的函数类型.html"><strong aria-hidden="true">5.1.7.</strong> ts 中的函数类型</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../uniapp/index.html"><strong aria-hidden="true">6.</strong> Uniapp</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../uniapp/uniapp中pages.json的配置.html"><strong aria-hidden="true">6.1.</strong> uniapp 中 pages.json 的配置</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp命令行创建项目.html"><strong aria-hidden="true">6.2.</strong> uniapp 命令行创建项目</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp拦截器.html"><strong aria-hidden="true">6.3.</strong> uniapp 拦截器</a></li><li class="chapter-item expanded "><a href="../uniapp/uniapp轮播图.html"><strong aria-hidden="true">6.4.</strong> uniapp 轮播图</a></li><li class="chapter-item expanded "><a href="../uniapp/vscode中的uniapp配置.html"><strong aria-hidden="true">6.5.</strong> vscode 中的 uniapp 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/index.html"><strong aria-hidden="true">7.</strong> Vue</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/index.html"><strong aria-hidden="true">7.1.</strong> Css3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/css3/css3中的sticky定位.html"><strong aria-hidden="true">7.1.1.</strong> css3 中的 sticky 定位</a></li><li class="chapter-item expanded "><a href="../Vue/css3/css3中的伪类.html"><strong aria-hidden="true">7.1.2.</strong> css3 中的伪类</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/element-plus/index.html"><strong aria-hidden="true">7.2.</strong> ElementPlus</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus导入自定义主题色.html"><strong aria-hidden="true">7.2.1.</strong> element-plus 导入自定义主题色</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus表单校验.html"><strong aria-hidden="true">7.2.2.</strong> element-plus 表单校验</a></li><li class="chapter-item expanded "><a href="../Vue/element-plus/element-plus去除菜单下划线.html"><strong aria-hidden="true">7.2.3.</strong> element-plus 去除菜单下划线</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/error/index.html"><strong aria-hidden="true">7.3.</strong> Error</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/error/无法找到.vue.html"><strong aria-hidden="true">7.3.1.</strong> 无法找到.vue</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/js/index.html"><strong aria-hidden="true">7.4.</strong> Js</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/js/async和await的使用.html"><strong aria-hidden="true">7.4.1.</strong> async 和 await 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/es6模板字符串.html"><strong aria-hidden="true">7.4.2.</strong> es6 模板字符串</a></li><li class="chapter-item expanded "><a href="../Vue/js/export和export_default的区别.html"><strong aria-hidden="true">7.4.3.</strong> export 和 export_default 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/js/import的使用.html"><strong aria-hidden="true">7.4.4.</strong> import 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/js/js函数注释.html"><strong aria-hidden="true">7.4.5.</strong> js 函数注释</a></li><li class="chapter-item expanded "><a href="../Vue/js/js的可选链运算符.html"><strong aria-hidden="true">7.4.6.</strong> js 的可选链运算符</a></li><li class="chapter-item expanded "><a href="../Vue/js/promise函数的使用.html"><strong aria-hidden="true">7.4.7.</strong> promise 函数的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/pinia/index.html"><strong aria-hidden="true">7.5.</strong> Pinia</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/pinia/pinia的信息存入LocalStorage.html"><strong aria-hidden="true">7.5.1.</strong> pinia 的信息存入 LocalStorage</a></li><li class="chapter-item expanded "><a href="../Vue/pinia/vue3中的pinia的使用.html"><strong aria-hidden="true">7.5.2.</strong> vue3 中的 pinia 的使用</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/sass/index.html"><strong aria-hidden="true">7.6.</strong> Sass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/sass/sass中的%选择器.html"><strong aria-hidden="true">7.6.1.</strong> sass 中的%选择器</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue-router/index.html"><strong aria-hidden="true">7.7.</strong> VueRouter</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中keep-alive的使用.html"><strong aria-hidden="true">7.7.1.</strong> vue3 中 keep-alive 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中滚动行为scrollBehavior.html"><strong aria-hidden="true">7.7.2.</strong> vue3 中滚动行为 scrollBehavior</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中的router-view.html"><strong aria-hidden="true">7.7.3.</strong> vue3 中的 router-view</a></li><li class="chapter-item expanded "><a href="../Vue/vue-router/vue3中配置@别名.html"><strong aria-hidden="true">7.7.4.</strong> vue3 中配置@别名</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue2/index.html"><strong aria-hidden="true">7.8.</strong> Vue2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue2/vue2的sass-loader载入问题.html"><strong aria-hidden="true">7.8.1.</strong> vue2 的 sass-loader 载入问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2自定义登录组件.html"><strong aria-hidden="true">7.8.2.</strong> vue2 自定义登录组件</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2路由只能跳转一次问题.html"><strong aria-hidden="true">7.8.3.</strong> vue2 路由只能跳转一次问题</a></li><li class="chapter-item expanded "><a href="../Vue/vue2/vue2配置.html"><strong aria-hidden="true">7.8.4.</strong> vue2 配置</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vue3/index.html"><strong aria-hidden="true">7.9.</strong> Vue3</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中hooks和pinia的区别.html"><strong aria-hidden="true">7.9.1.</strong> vue3 中 hooks 和 pinia 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中sass的使用.html"><strong aria-hidden="true">7.9.2.</strong> vue3 中 sass 的使用</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中slot和props的区别.html"><strong aria-hidden="true">7.9.3.</strong> vue3 中 slot 和 props 的区别</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中使用defineProps和defineEmits.html"><strong aria-hidden="true">7.9.4.</strong> vue3 中使用 defineProps 和 defineEmits</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的computed和watch方法.html"><strong aria-hidden="true">7.9.5.</strong> vue3 中的 computed 和 watch 方法</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的npm安装包.html"><strong aria-hidden="true">7.9.6.</strong> vue3 中的 npm 安装包</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的provide和inject.html"><strong aria-hidden="true">7.9.7.</strong> vue3 中的 provide 和 inject</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3中的scoped和v-deep.html"><strong aria-hidden="true">7.9.8.</strong> vue3 中的 scoped 和 v-deep</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用props传值.html"><strong aria-hidden="true">7.9.9.</strong> vue3 使用 props 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3使用slot传值.html"><strong aria-hidden="true">7.9.10.</strong> vue3 使用 slot 传值</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/vue3配置axios.html"><strong aria-hidden="true">7.9.11.</strong> vue3 配置 axios</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/单文件和多文件.html"><strong aria-hidden="true">7.9.12.</strong> 单文件和多文件</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/响应式和声明式.html"><strong aria-hidden="true">7.9.13.</strong> 响应式和声明式</a></li><li class="chapter-item expanded "><a href="../Vue/vue3/选项式和组合式.html"><strong aria-hidden="true">7.9.14.</strong> 选项式和组合式</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueplugins/index.html"><strong aria-hidden="true">7.10.</strong> Vueplugins</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueplugins/图片放大镜效果.html"><strong aria-hidden="true">7.10.1.</strong> 图片放大镜效果</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/vueuse/index.html"><strong aria-hidden="true">7.11.</strong> Vueuse</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/vueuse/useIntersectionObserver.html"><strong aria-hidden="true">7.11.1.</strong> Use Intersection Observer</a></li><li class="chapter-item expanded "><a href="../Vue/vueuse/useScroll.html"><strong aria-hidden="true">7.11.2.</strong> Use Scroll</a></li></ol></li><li class="chapter-item expanded "><a href="../Vue/相关配置/index.html"><strong aria-hidden="true">7.12.</strong> 相关配置</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vue/相关配置/prettier格式化插件.html"><strong aria-hidden="true">7.12.1.</strong> prettier 格式化插件</a></li><li class="chapter-item expanded "><a href="../Vue/相关配置/设置路径src目录别名为@.html"><strong aria-hidden="true">7.12.2.</strong> 设置路径src目录别名为@</a></li></ol></li></ol></li><li class="chapter-item expanded "><li class="spacer"></li><li class="chapter-item expanded "><a href="../Django/index.html"><strong aria-hidden="true">8.</strong> Django</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Django/Django.html"><strong aria-hidden="true">8.1.</strong> Django 的 bug</a></li><li class="chapter-item expanded "><a href="../Django/Drf用户认证.html" class="active"><strong aria-hidden="true">8.2.</strong> Drf 用户认证</a></li><li class="chapter-item expanded "><a href="../Django/Token详解.html"><strong aria-hidden="true">8.3.</strong> Token 详解</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/index.html"><strong aria-hidden="true">9.</strong> Go</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/index.html"><strong aria-hidden="true">9.1.</strong> Bug</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/bug/gorm无法寻址.html"><strong aria-hidden="true">9.1.1.</strong> gorm 无法寻址</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gin/index.html"><strong aria-hidden="true">9.2.</strong> Gin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/Gin/gin实现热加载.html"><strong aria-hidden="true">9.2.1.</strong> gin 实现热加载</a></li><li class="chapter-item expanded "><a href="../Go/Gin/gin获取路径参数.html"><strong aria-hidden="true">9.2.2.</strong> gin 获取路径参数</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/Gorm/index.html"><strong aria-hidden="true">9.3.</strong> Gorm</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对一.html"><strong aria-hidden="true">9.3.1.</strong> gorm 一对一</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm一对多.html"><strong aria-hidden="true">9.3.2.</strong> gorm 一对多</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm多态关联.html"><strong aria-hidden="true">9.3.3.</strong> gorm 多态关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的Many2Many.html"><strong aria-hidden="true">9.3.4.</strong> gorm 的 Many2Many</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的关联.html"><strong aria-hidden="true">9.3.5.</strong> gorm 的关联</a></li><li class="chapter-item expanded "><a href="../Go/gorm/gorm的多态关联和事务.html"><strong aria-hidden="true">9.3.6.</strong> gorm 的多态关联和事务</a></li><li class="chapter-item expanded "><a href="../Go/gorm/增删改查.html"><strong aria-hidden="true">9.3.7.</strong> 增删改查</a></li><li class="chapter-item expanded "><a href="../Go/gorm/连接mysql.html"><strong aria-hidden="true">9.3.8.</strong> 连接 mysql</a></li></ol></li><li class="chapter-item expanded "><a href="../Go/go基础知识/index.html"><strong aria-hidden="true">9.4.</strong> go 基础知识</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Go/go基础知识/go_get和go_install区别.html"><strong aria-hidden="true">9.4.1.</strong> go_get 和 go_install 区别</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go中结构体互转.html"><strong aria-hidden="true">9.4.2.</strong> go 中结构体互转</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go变量声明.html"><strong aria-hidden="true">9.4.3.</strong> go 变量声明</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go文件操作.html"><strong aria-hidden="true">9.4.4.</strong> go 文件操作</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go环境变量及配置.html"><strong aria-hidden="true">9.4.5.</strong> go 环境变量及配置</a></li><li class="chapter-item expanded "><a href="../Go/go基础知识/go的printf占位符.html"><strong aria-hidden="true">9.4.6.</strong> go 的 printf 占位符</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../Mysql/index.html"><strong aria-hidden="true">10.</strong> Mysql</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Mysql/数据库画er图.html"><strong aria-hidden="true">10.1.</strong> 数据库画 er 图</a></li><li class="chapter-item expanded "><a href="../Mysql/第三章作业.html"><strong aria-hidden="true">10.2.</strong> 第三章作业</a></li></ol></li><li class="chapter-item expanded "><a href="../openguass/index.html"><strong aria-hidden="true">11.</strong> Openguass</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../openguass/postgresql增删改查.html"><strong aria-hidden="true">11.1.</strong> postgresql 增删改查</a></li><li class="chapter-item expanded "><a href="../openguass/postgresql文档.html"><strong aria-hidden="true">11.2.</strong> postgresql 文档</a></li><li class="chapter-item expanded "><a href="../openguass/创建openguass容器.html"><strong aria-hidden="true">11.3.</strong> 创建 openguass 容器</a></li><li class="chapter-item expanded "><a href="../openguass/数据库错题.html"><strong aria-hidden="true">11.4.</strong> 数据库错题</a></li><li class="chapter-item expanded "><a href="../openguass/第一次实验.html"><strong aria-hidden="true">11.5.</strong> 第一次实验</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">浩瀚星河</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="drf-用户认证-----authentication"><a class="header" href="#drf-用户认证-----authentication">Drf 用户认证     Authentication</a></h3>
+<h4 id="as_view的本质"><a class="header" href="#as_view的本质">as_view的本质</a></h4>
+<p>当用户访问网址时，就会触发视图函数，as_view函数就被触发，在as_view当中，同时调用了他父类的as_view函数。</p>
+<pre><code class="language-python">@classmethod
+def as_view(cls, **initkwargs):
+    """
+    Store the original class on the view function.
+
+    This allows us to discover information about the view when we do URL
+    reverse lookups.  Used for breadcrumb generation.
+    """
+    if isinstance(getattr(cls, 'queryset', None), models.query.QuerySet):
+        def force_evaluation():
+            raise RuntimeError(
+                'Do not evaluate the `.queryset` attribute directly, '
+                'as the result will be cached and reused between requests. '
+                'Use `.all()` or call `.get_queryset()` instead.'
+            )
+        cls.queryset._fetch_all = force_evaluation
+
+    view = super().as_view(**initkwargs)
+    view.cls = cls
+    view.initkwargs = initkwargs
+
+    # Note: session based authentication is explicitly CSRF validated,
+    # all other authentication is CSRF exempt.
+    return csrf_exempt(view)
+</code></pre>
+<p>父类函数的as_view</p>
+<pre><code class="language-python">@classonlymethod
+def as_view(cls, **initkwargs):
+    """Main entry point for a request-response process."""
+    for key in initkwargs:
+        if key in cls.http_method_names:
+            raise TypeError(
+                "The method name %s is not accepted as a keyword argument "
+                "to %s()." % (key, cls.__name__)
+            )
+        if not hasattr(cls, key):
+            raise TypeError(
+                "%s() received an invalid keyword %r. as_view "
+                "only accepts arguments that are already "
+                "attributes of the class." % (cls.__name__, key)
+            )
+
+    def view(request, *args, **kwargs):
+        self = cls(**initkwargs)
+        self.setup(request, *args, **kwargs)
+        if not hasattr(self, "request"):
+            raise AttributeError(
+                "%s instance has no 'request' attribute. Did you override "
+                "setup() and forget to call super()?" % cls.__name__
+            )
+        return self.dispatch(request, *args, **kwargs)
+
+    view.view_class = cls
+    view.view_initkwargs = initkwargs
+
+    # __name__ and __qualname__ are intentionally left unchanged as
+    # view_class should be used to robustly determine the name of the view
+    # instead.
+    view.__doc__ = cls.__doc__
+    view.__module__ = cls.__module__
+    view.__annotations__ = cls.dispatch.__annotations__
+    # Copy possible attributes set by decorators, e.g. @csrf_exempt, from
+    # the dispatch method.
+    view.__dict__.update(cls.dispatch.__dict__)
+
+    # Mark the callback if the view class is async.
+    if cls.view_is_async:
+        markcoroutinefunction(view)
+
+    return view
+</code></pre>
+<p>其父类的as_view函数的作用就是检验as_view中传递参数的合法性，并且返回一个view，实际上view中实现dispatch方法，再去父类中查找这个dispatch方法，发现父类中并没用找到这个方法。</p>
+<p>那我们再去子类中查找这个dispatch方法，如下</p>
+<pre><code class="language-python">def dispatch(self, request, *args, **kwargs):
+    """
+    `.dispatch()` is pretty much the same as Django's regular dispatch,
+    but with extra hooks for startup, finalize, and exception handling.
+    """
+    self.args = args
+    self.kwargs = kwargs
+    request = self.initialize_request(request, *args, **kwargs)
+    self.request = request
+    self.headers = self.default_response_headers  # deprecate?
+
+    try:
+        self.initial(request, *args, **kwargs)
+
+        # Get the appropriate handler method
+        if request.method.lower() in self.http_method_names:
+            handler = getattr(self, request.method.lower(),
+                                self.http_method_not_allowed)
+        else:
+            handler = self.http_method_not_allowed
+
+        response = handler(request, *args, **kwargs)
+
+    except Exception as exc:
+        response = self.handle_exception(exc)
+
+    self.response = self.finalize_response(request, response, *args, **kwargs)
+    return self.response
+</code></pre>
+<p>这个dispatch方法的作用：</p>
+<ul>
+<li>原生django中request传递过来的数据，把他们封装到字典或者元组中，存入APIView的self.args和self.kwargs中</li>
+<li>并且对django的request进行二次封装</li>
+<li>设置响应头</li>
+</ul>
+<h4 id="drf封装的request"><a class="header" href="#drf封装的request">Drf封装的request</a></h4>
+<pre><code class="language-python">def initialize_request(self, request, *args, **kwargs):
+    """
+        Returns the initial request object.
+        """
+    parser_context = self.get_parser_context(request)
+
+    return Request(
+        request,
+        parsers=self.get_parsers(),
+        authenticators=self.get_authenticators(),
+        negotiator=self.get_content_negotiator(),
+        parser_context=parser_context
+    )
+</code></pre>
+<p>authenticators=self.get_authenticators()  在Drf的request当中新增了用户认证</p>
+<p>我们来看一下用户认证具体实现的方法</p>
+<pre><code class="language-python">def get_authenticators(self):
+    """
+    Instantiates and returns the list of authenticators that this view can use.
+    """
+    return [auth() for auth in self.authentication_classes]
+</code></pre>
+<blockquote>
+<ol>
+<li>self.get_authenticators()源码分析，采用列表生成式，循环self.authentication_classes，实例化其中的每一个类，返回列表。</li>
+<li>不难发现authentication_classes属性正式我们在认证的时候用到认证类列表，这里会自动寻找该属性进行认证。</li>
+<li>倘若我们的视图类没有定义认证方法呢？，当然django rest framework 已经给我们加了默认配置，</li>
+<li>如果我们没有定义会自动使用settings中的DEFAULT_AUTHENTICATION_CLASSES作为默认(全局)下面是APIView类中的共有属性</li>
+</ol>
+</blockquote>
+<pre><code>我们上面分析了APIView在原有的request基础上封装了一些其他功能
+
+
+self.initialize_request(request, *args, **kwargs)
+
+
+我们继续分析往下从diapath()这个方法往下走
+
+
+我们可以看到他是将我们封装后的新的request继续往下传递，然后执行
+</code></pre>
+<p>在dispatch函数当中还有一个<code>self.initial(request, *args, **kwargs)</code>方法</p>
+<pre><code class="language-python"># 这里的request 是封装后的request，传入def initial(self, request, *args, **kwargs)这个方法
+def initial(self, request, *args, **kwargs):
+    """
+    Runs anything that needs to occur prior to calling the method handler.
+    """
+    self.format_kwarg = self.get_format_suffix(**kwargs)
+
+    # Perform content negotiation and store the accepted info on the request
+    neg = self.perform_content_negotiation(request)
+    request.accepted_renderer, request.accepted_media_type = neg
+
+    # Determine the API version, if versioning is in use.
+    version, scheme = self.determine_version(request, *args, **kwargs)
+    request.version, request.versioning_scheme = version, scheme
+
+    # Ensure that the incoming request is permitted
+    # 身份认证
+    self.perform_authentication(request)
+    # 检查权限
+    self.check_permissions(request)
+    # 流量限速
+    self.check_throttles(request)
+</code></pre>
+<h4 id="dispatch中的用户认证"><a class="header" href="#dispatch中的用户认证">dispatch中的用户认证</a></h4>
+<p>perform_authentication</p>
+<pre><code class="language-python">def perform_authentication(self, request):
+    """
+    Perform authentication on the incoming request.
+
+    Note that if you override this and simply 'pass', then authentication
+    will instead be performed lazily, the first time either
+    `request.user` or `request.auth` is accessed.
+    """
+    request.user
+</code></pre>
+<p>他返回的是新封装request的user属性。那我们就得看下他源码是如何封装这个属性，以及user这个属性表示什么</p>
+<pre><code class="language-python">@property
+def user(self):
+    """
+    Returns the user associated with the current request, as authenticated
+    by the authentication classes provided to the request.
+
+    返回与当前请求关联的经过身份验证的用户，提供给请求的身份验证
+    """
+    # 判断如果_user 不在request中的话，执行 self._authenticate()这个方法
+    if not hasattr(self, '_user'):
+        with wrap_attributeerrors():
+            # 执行认证方法
+            self._authenticate()
+    return self._user
+</code></pre>
+<pre><code>这里面的user是在新的封装的request这个类中找到的
+</code></pre>
+<p>我们可以看到他其实还是执行了self._authenticate()。我们还是要看下他的这个authenticate()方法。</p>
+<p>self._authenticate</p>
+<pre><code class="language-python">def _authenticate(self):
+    """
+    Attempt to authenticate the request using each authentication instance
+    in turn.
+    """
+    for authenticator in self.authenticators:
+        try:
+
+            # 执行认证类的authenticate方法
+            # 这里分三种情况
+            # 1.如果authenticate方法抛出异常，self._not_authenticated()执行
+            # 2.有返回值，必须是元组：（request.user,request.auth）
+
+
+
+            # 认证类的实例执行authenticate()这个方法，这个可以重写自己的代码逻辑
+            user_auth_tuple = authenticator.authenticate(self)
+        except exceptions.APIException:
+            self._not_authenticated()
+            raise
+
+        # 3.返回None，表示当前认证不处理，等下一个认证来处理
+        if user_auth_tuple is not None:
+            self._authenticator = authenticator
+            # 返回值对应示例中的token_obj.user和token_obj
+            self.user, self.auth = user_auth_tuple
+            return
+
+    self._not_authenticated()
+</code></pre>
+<p>小结</p>
+<pre><code>1. 这里他将执行每一个认证类的实例的authenticate()方法，也就是说如果要写认证类的话是必须写这个方法的
+2. 必须要求返回元祖，然后元祖不为空时就将元祖内的user赋值给self.user，其实也就是侧面赋值给了self._user,
+返回到self.perform_authentication(request)这里，其实也就是返回了这个self._user,使得我们认证知道请求是谁，是否登录的作用
+</code></pre>
+<p>def authenticate(self, request)</p>
+<pre><code class="language-python">class ForcedAuthentication:
+    """
+    This authentication class is used if the test client or request factory
+    forcibly authenticated the request.
+    """
+
+    def __init__(self, force_user, force_token):
+        self.force_user = force_user
+        self.force_token = force_token
+
+    # 一定返回元组
+    def authenticate(self, request):
+        return (self.force_user, self.force_token)
+</code></pre>
+<p>这个认证工厂要求必须返回元祖</p>
+<p>def _not_authenticated(self)</p>
+<pre><code class="language-python">def _not_authenticated(self):
+    """
+    Set authenticator, user &amp; authtoken representing an unauthenticated request.
+
+    Defaults are None, AnonymousUser &amp; None.
+    """
+    self._authenticator = None
+
+    if api_settings.UNAUTHENTICATED_USER:
+        self.user = api_settings.UNAUTHENTICATED_USER()
+    else:
+        self.user = None
+
+    if api_settings.UNAUTHENTICATED_TOKEN:
+        self.auth = api_settings.UNAUTHENTICATED_TOKEN()
+    else:
+        self.auth = None
+</code></pre>
+<p>小结</p>
+<pre><code>没有身份，相当于匿名用户，默认设置AnonymousUser，如需要单独设置匿名用户返回值，
+则编写需要写UNAUTHENTICATED_USER的返回值
+
+所以我们需要认证的时候，需要在每一个认证类中定义authenticate进行验证，并且需要返回元祖
+</code></pre>
+<h4 id="全局配置与局部配置"><a class="header" href="#全局配置与局部配置">全局配置与局部配置</a></h4>
+<p>首先我们先补充点面向对象的知识</p>
+<pre><code class="language-python">class APIView(object):
+    authentication_classes=读取配置文件中的列表
+    def dispatch(self):
+        self.authentication classes
+class Userview(APIView):
+    authentication_classes=[11,22,3,44]
+
+
+obj Userview()
+obj.dispatch()
+</code></pre>
+<p>在创建子类对象时，调用子类对象的方法时，优先会去子类中找，如果没有才会去父类找，如果父类方法中也调用了方法，也会优先去子类找方法，找不到才会在父类调用方法。</p>
+<p>和前文的base.py(Django的View视图)中调用了dispatch方法，而其并未定义dispatch方法，让其子类(APIView)去实现（接受参数，封装request对象，添加认证功能等等）</p>
+<h5 id="全局配置"><a class="header" href="#全局配置">全局配置</a></h5>
+<p>在setting.py中加入以下代码</p>
+<pre><code class="language-python"># 全局配置Drf
+REST_FRAMEWORK={
+    "DEFAULT_AUTHENTICATION_CLASSES":["ext.auth.LoginAuthentication",] #你自己认证类的路径
+}
+</code></pre>
+<p>上述自定义的配置文件本质是</p>
+<pre><code class="language-python">def get_authenticators(self):
+        """
+        Instantiates and returns the list of authenticators that this view can use.
+        """
+        return [auth() for auth in self.authentication_classes]
+</code></pre>
+<p>Drf会在APIView中实例化authentication_classes里的内容</p>
+<h5 id="局部配置"><a class="header" href="#局部配置">局部配置</a></h5>
+<pre><code class="language-python"># 可以设置authentication_classes中列表的值添加验证组件
+authentication_classes = [
+    LoginAuthentication,
+]
+</code></pre>
+<p>根据前面面向对象的知识，当我们自定义验证类的时候，并使用自定义类的as_view时，优先级是大于Drf所读取的配置文件。</p>
+<p>也就是说，局部配置  &gt;  全局配置</p>
+<p>举个例子：</p>
+<p>验证类:</p>
+<pre><code class="language-python">from rest_framework.authentication import BaseAuthentication
+from rest_framework.exceptions import AuthenticationFailed
+# Create your views here.
+# 用户是否登录校验
+class LoginAuthentication(BaseAuthentication):
+    def authenticate(self, request):
+        token = request._request.GET.get("token")
+        if token:
+            return "username", token
+        raise AuthenticationFailed(
+            {
+                'status': False,
+                'error_msg': "你的账户尚未登录",
+            }
+        )
+</code></pre>
+<p>视图类：</p>
+<pre><code class="language-python">from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from ext.auth import LoginAuthentication
+
+
+# 首页
+class Home(APIView):
+    # 可以设置authentication_classes中列表的值添加验证组件
+    authentication_classes = [
+        LoginAuthentication,
+    ]
+
+    def get(self, request):
+        # 认证类会把request.user,request.auth返回给一个元组，并且该示例中request.auth是一个token
+        print(request.user, request.auth)
+        return Response({"success_msg": f"token为{request.auth}的用户 --登陆成功"})
+
+
+# 订单
+class Order(APIView):
+    authentication_classes = []
+    def get(self, request):
+
+        return Response({"success_msg": "登陆成功"})
+</code></pre>
+<p>全局配置：</p>
+<pre><code class="language-python"># 全局配置Drf
+REST_FRAMEWORK={
+    "DEFAULT_AUTHENTICATION_CLASSES":["ext.auth.LoginAuthentication",] #你自己认证类的路径
+}
+</code></pre>
+<p><img src="img/image-20240403094500255.png" alt="image-20240403094500255" /></p>
+<p><img src="img/image-20240403094710351.png" alt="image-20240403094710351" /></p>
+<p><img src="img/image-20240403094737339.png" alt="image-20240403094737339" /></p>
+<p>子类配置的authentication_classes会覆盖全局配置，如Order接口所示。</p>
+<h4 id="多个认证类"><a class="header" href="#多个认证类">多个认证类</a></h4>
+<blockquote>
+<p>假如说我现在有一个业务需求，写一个校验用户发起的请求是否携带token的接口，各个平台的token携带方式不同，比如：</p>
+<p>PC端网页=&gt;url</p>
+<p>微信小程序=&gt;request-header</p>
+<p>安卓浏览器=&gt;request-body</p>
+</blockquote>
+<p>在ext下的auth设置多个认证类</p>
+<pre><code class="language-python"># 检验url是否有token
+class UrlAuthentication(BaseAuthentication):
+    def authenticate(self, request):
+        token = request.query_params.get("token",None)
+        if not token:
+            return
+        return "url",token
+# 检验请求头是否有token
+class RequestHeadAuthentication(BaseAuthentication):
+    def authenticate(self, request):
+        token = request.META.get("HTTP_TOKEN",None)
+        print(token)
+        if not token:
+            return
+        return "request-head", token
+# 检验请求体是否·有token
+class RequestBodyAuthentication(BaseAuthentication):
+    def authenticate(self, request):
+        token = request.data.get("token",None)
+        if not token:
+            return
+        return "request-body", token
+</code></pre>
+<p>views.py</p>
+<pre><code class="language-python">class Index(APIView):
+    authentication_classes = [UrlAuthentication,RequestHeadAuthentication,RequestBodyAuthentication]
+    def get(self, request):
+        token = request.auth
+        return Response({"status":200,"msg":f"用户{token}通过{request.user},欢迎您来到首页"})
+</code></pre>
+<p>结果：</p>
+<p><img src="img/image-20240403222028788.png" alt="image-20240403222028788" /></p>
+<p><img src="img/image-20240403222126256.png" alt="image-20240403222126256" /></p>
+<p><img src="img/image-20240403222156070.png" alt="image-20240403222156070" /></p>
+<p>当时这样做会有个漏洞，假如说用户哪个地方都没携带token</p>
+<p><img src="img/image-20240403222458353.png" alt="image-20240403222458353" /></p>
+<p>为了避免这种情况，我们应该在视图中的authenication_classes末尾添加一个直接抛出异常的认证类，给用户返回403状态码，因为用户没有足够权限，必须得登录，生成token</p>
+<pre><code class="language-python">class NoLoginAuthentication(BaseAuthentication):
+    def authenticate(self, request):
+        raise AuthenticationFailed("您没有足够权限，请您登录")
+</code></pre>
+<p><img src="img/image-20240403224308069.png" alt="image-20240403224308069" /></p>
+<h4 id="authenticate_header作用"><a class="header" href="#authenticate_header作用">authenticate_header作用</a></h4>
+<blockquote>
+<p>authenticate_header的作用是返回“WWW-Authenticate: xxxxxx”信息和正确的状态码</p>
+</blockquote>
+<p>假如说认证类不设置authenticate_header，用户访问出错会返回403状态码</p>
+<p>实际上，Drf的AuthenticationFailed是这样定义的</p>
+<pre><code class="language-python">class AuthenticationFailed(APIException):
+    status_code = status.HTTP_401_UNAUTHORIZED
+    default_detail = _('Incorrect authentication credentials.')
+    default_code = 'authentication_failed'
+</code></pre>
+<p>如果是认证不通过，则返回401状态码</p>
+<blockquote>
+<p>补充:</p>
+<p>401 ===&gt; 一般是指认证错误，这是专门为认证设计的</p>
+<p>403 ===&gt; 服务器禁止用户访问资源，不仅仅只包含认证问题，比如说爬虫的时候，使用多线程爬取网站，结果爬到一半，直接报403，对方服务器使用自动化脚本把你IP封了，</p>
+<p>说到底服务器就是监测用户可疑行为，如发现用户所在位置被屏蔽了（openai）,就会直接封禁，不允许用户访问</p>
+<p>可以说403包含了401</p>
+<p>AuthenticationFailed使用401状态码更加精准</p>
+</blockquote>
+<p>就拿上面的Home接口举例</p>
+<p><img src="img/image-20240403094500255-1712157606757-1.png" alt="image-20240403094500255" /></p>
+<p>没有设置authenticate_header导致返回状态码出错</p>
+<pre><code class="language-python">def authenticate_header(self, request):
+    return "API"
+</code></pre>
+<p>往认证类追加authenticate_header方法后：</p>
+<p><img src="img/image-20240403232351791.png" alt="image-20240403232351791" /></p>
+<p>Drf还提供了另一种authenticate_header的方法</p>
+<pre><code class="language-python">def authenticate_header(self, request):
+    return 'Basic realm="%s"' % self.www_authenticate_realm
+</code></pre>
+<p>在监测到响应头有“WWW-Authenticate: xxxxxx”信息时：弹出弹窗校验</p>
+<p><img src="img/image-20240403234146933.png" alt="image-20240403234146933" /></p>
+<blockquote>
+<p>但是实际开发用得很少，因为请求接口，要么成功，要么失败，成功返回数据，失败返回状态码，错误信息，你弹个弹窗出来是什么意思嘛~~</p>
+</blockquote>
+<h4 id="自定义认证类和其父类baseauthentication"><a class="header" href="#自定义认证类和其父类baseauthentication">自定义认证类和其父类(BaseAuthentication)</a></h4>
+<p>BaseAuthentication</p>
+<pre><code class="language-python">class BaseAuthentication:
+    """
+    All authentication classes should extend BaseAuthentication.
+    """
+
+    def authenticate(self, request):
+        """
+        Authenticate the request and return a two-tuple of (user, token).
+        """
+        raise NotImplementedError(".authenticate() must be overridden.")
+
+    def authenticate_header(self, request):
+        """
+        Return a string to be used as the value of the `WWW-Authenticate`
+        header in a `401 Unauthenticated` response, or `None` if the
+        authentication scheme should return `403 Permission Denied` responses.
+        """
+        pass
+</code></pre>
+<blockquote>
+<p>父类的authenticate方法直接抛出异常，子类必须重写该方法，否则Drf加载自定义认证类时候会直接去父类找，抛出异常，程序报错</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Django/Django.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../Django/Token详解.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Django/Django.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../Django/Token详解.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
